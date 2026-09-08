@@ -197,7 +197,7 @@
 -->
 <div class="page">
 
-  <div class="mast"><div class="t">Deine Vorsorge, erklärt<small>Was bleibt dir im Alter — und was kannst du daran ändern?</small></div></div>
+  <div class="mast"><div class="t">Deine Vorsorge im Überblick</div></div>
 
   <div class="stepper" id="stepper">
     <button data-step="0" aria-current="true">1 · Deine Angaben</button>
@@ -207,13 +207,13 @@
 
   <!-- TEIL 1 -->
   <section class="step active" data-step="0">
-    <p class="intro">Wie viel Geld dir nach der Pensionierung jeden Monat bleibt, wissen die wenigsten genau. Trag deine Angaben ein — Säule für Säule — und finde es heraus.</p>
+    <p class="intro">Lerne das Schweizer Vorsorgesystem kennen und finde heraus, wie viel Geld dir nach der Pensionierung monatlich zur Verfügung steht. Experimentiere anschliessend mit verschiedenen Szenarien und entdecke, wie du deine Rente verbessern kannst.</p>
     <div class="h2row"><span class="snum" style="background:var(--ink)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg></span><h2 style="margin:0">Ein paar Eckdaten</h2></div>
     <div class="basics">
       <div class="bfld"><label>Alter</label><input id="alter" type="number" value="44"></div>
       <div class="bfld"><label>Bruttoeinkommen pro Monat</label><input id="lohn" type="number" value="8000"></div>
       <div class="bfld"><label>Hast du im Ausland gearbeitet und dort einen Rentenanspruch?</label><div class="seg" id="ausland-toggle" style="margin-top:2px"><button data-a="nein" aria-pressed="false">Nein</button><button data-a="ja" aria-pressed="true">Ja</button></div></div>
-      <div class="bfld" id="ausland-field"><label>Ausländische Rente pro Monat</label><input id="ausland" type="number" value="610"><span class="where">Aus deinen Auslandsjahren — grob geschätzt. Wird separat ausbezahlt.</span></div>
+      <div class="bfld" id="ausland-field"><label>Rente aus dem Ausland pro Monat (geschätzt)</label><input id="ausland" type="number" value="610"></div>
     </div>
 
     <h2 style="margin-top:34px">Dein Vorsorge-System</h2>
@@ -315,8 +315,7 @@
 
     <div class="saeule">
       <div class="shead"><span class="snum" style="background:var(--s3b)">+</span><h3>Weiteres Vermögen (Säule 3b)<span class="stag">frei · optional</span></h3></div>
-      <p class="sexp">Alles, was du sonst noch angespart hast und im Alter nutzen könntest — Konten, Wertschriften ausserhalb der Vorsorge. Das ist die frei verfügbare „Säule 3b". Eine grobe Schätzung genügt; lass es auf 0, wenn du es weglassen willst.</p>
-      <p class="sfind">Eine grobe Schätzung genügt: deine Ersparnisse und Anlagen ausserhalb von PK und 3a, <b>wie du sie etwa bei der Pensionierung erwartest</b>.</p>
+      <p class="sexp">Neben den drei Säulen zählt auch dein übriges Erspartes — Konten, Wertschriften und andere Anlagen ausserhalb der Vorsorge. Dieses frei verfügbare Vermögen nennt man <b>Säule 3b</b>. Eine grobe Schätzung genügt; lass es auf 0, wenn du es weglassen willst.</p>
       <div class="sinput"><label>Geschätztes weiteres Vermögen (mit 65)</label><input id="s3b" type="number" value="0"></div>
     </div>
     <div class="nav"><span></span><button class="btn btn-next" onclick="go(1)">Weiter zum Ergebnis →</button></div>
