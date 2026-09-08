@@ -109,6 +109,19 @@
   .sr-gap{text-align:right;}
   .sr-gap .amt-sm{color:var(--gap);}
   .scenario-result .bar{margin:12px 0 0;height:16px;}
+  .estim{margin:6px 0 16px;max-width:430px;}
+  .estim summary{cursor:pointer;font-size:13px;color:var(--pk);font-weight:600;list-style:none;}
+  .estim summary::-webkit-details-marker{display:none;}
+  .estim summary::before{content:"+ ";}
+  .estim[open] summary::before{content:"– ";}
+  .estim-body{margin-top:11px;padding:15px 16px;background:var(--bg);border-radius:12px;border:1px solid var(--line);}
+  .estim-body>p{font-size:13.5px;color:var(--soft);margin:0 0 12px;line-height:1.5;}
+  .estim-body .sinput{margin-bottom:10px;max-width:100%;}
+  .estim-result{font-size:15px;color:var(--ink);margin:8px 0 12px;}
+  .estim-result b{font-family:var(--serif);color:var(--ahv);}
+  .btn-estim{font-family:var(--sans);font-size:13.5px;font-weight:600;background:var(--ahv);color:#fff;border:none;border-radius:9px;padding:9px 16px;cursor:pointer;}
+  #ausland-toggle{align-self:flex-start;}
+  #ausland-toggle button{padding:8px 20px;}
   .scenhint{font-size:13px;color:var(--soft);margin:0 0 4px;}
   .sr-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin-top:13px;font-size:12px;color:var(--soft);}
   .sr-legend span{display:inline-flex;align-items:center;gap:5px;}
@@ -199,7 +212,8 @@
     <div class="basics">
       <div class="bfld"><label>Alter</label><input id="alter" type="number" value="44"></div>
       <div class="bfld"><label>Bruttoeinkommen pro Monat</label><input id="lohn" type="number" value="8000"></div>
-      <div class="bfld"><label>Ausländische Rente pro Monat</label><input id="ausland" type="number" value="610"><span class="where">Falls du im Ausland gearbeitet hast, ergibt sich oft ein eigener, separat auszuzahlender Anspruch. Sonst 0.</span></div>
+      <div class="bfld"><label>Hast du im Ausland gearbeitet und dort einen Rentenanspruch?</label><div class="seg" id="ausland-toggle" style="margin-top:2px"><button data-a="nein" aria-pressed="false">Nein</button><button data-a="ja" aria-pressed="true">Ja</button></div></div>
+      <div class="bfld" id="ausland-field"><label>Ausländische Rente pro Monat</label><input id="ausland" type="number" value="610"><span class="where">Aus deinen Auslandsjahren — grob geschätzt. Wird separat ausbezahlt.</span></div>
     </div>
 
     <h2 style="margin-top:34px">Dein Vorsorge-System</h2>
@@ -237,6 +251,15 @@
       <p class="sexp">Dein Spielraum ist entsprechend klein: Entscheidend ist fast nur die Zahl deiner Beitragsjahre. Fehlende Jahre kannst du höchstens fünf Jahre zurück nachzahlen, und nur, wenn du damals schon in der Schweiz AHV-pflichtig warst — Jahre vor einem Zuzug aus dem Ausland lassen sich nicht nachkaufen.</p>
       <p class="sfind">Deine voraussichtliche AHV-Rente bekommst du <b>kostenlos über die Rentenvorausberechnung deiner Ausgleichskasse</b> (Bearbeitung ca. 3 Wochen) — fürs Erste genügt ein geschätzter Näherungswert.</p>
       <div class="sinput"><label>AHV-Rente pro Monat (ab 65)</label><input id="ahv65" type="number" value="1660"></div>
+      <details class="estim">
+        <summary>Ich kenne die Zahl noch nicht — grob schätzen</summary>
+        <div class="estim-body">
+          <p>Aus deinem Einkommen und deinen Beitragsjahren schätzen wir einen Startwert. Ersetze ihn später durch die offizielle Rentenvorausberechnung.</p>
+          <div class="sinput"><label>Ab welchem Alter in der Schweiz erwerbstätig?</label><input id="eintritt-ahv" type="number" value="25"></div>
+          <div class="estim-result">Geschätzte AHV-Rente: <b id="est-ahv">CHF 1'660</b> / Monat</div>
+          <button class="btn-estim" onclick="applyEstim('ahv')">Wert übernehmen</button>
+        </div>
+      </details>
     </div>
     <div class="saeule">
       <div class="shead"><span class="snum" style="background:var(--pk)">2</span><h3>Berufliche Vorsorge (Pensionskasse)<span class="stag">über den Arbeitgeber · hält den Lebensstandard</span></h3></div>
@@ -257,6 +280,15 @@
       <p class="sexp">Man könnte das Kapital auch ganz oder teilweise beziehen — für diesen Überblick rechnen wir mit der Rente. Dein Spielraum ist grösser als bei der AHV: Mit einem freiwilligen Einkauf kannst du zusätzliches Kapital einzahlen, deine Rente erhöhen und im Einkaufsjahr Steuern sparen.</p>
       <p class="sfind">Diese Zahl steht als <b>‚voraussichtliche Altersrente' auf deinem Vorsorgeausweis</b> — den schickt dir deine Pensionskasse jedes Jahr zu.</p>
       <div class="sinput"><label>PK-Rente pro Monat (ab 65)</label><input id="pkrente" type="number" value="2270"></div>
+      <details class="estim">
+        <summary>Ich kenne die Zahl noch nicht — grob schätzen</summary>
+        <div class="estim-body">
+          <p>Achtung: Diese Schätzung ist <b>sehr grob</b> — sie kommt nur aus Lohn und Jahren, ohne deinen Vorsorgeausweis, und kann leicht um ±30% danebenliegen. Nimm sie als Startwert und ersetze sie, sobald du den Ausweis hast.</p>
+          <div class="sinput"><label>Ab welchem Alter in der Schweiz erwerbstätig?</label><input id="eintritt-pk" type="number" value="25"></div>
+          <div class="estim-result">Geschätzte PK-Rente: <b id="est-pk">CHF 1'560</b> / Monat</div>
+          <button class="btn-estim" onclick="applyEstim('pk')">Wert übernehmen</button>
+        </div>
+      </details>
     </div>
     <div class="saeule">
       <div class="shead"><span class="snum" style="background:var(--s3a)">3</span><h3>Private Vorsorge (Säule 3a)<span class="stag">freiwillig · dein Spielraum</span></h3></div>
@@ -307,7 +339,7 @@
         <div class="row"><span class="dot" style="background:var(--pk)"></span><span><span class="v" id="b-v-pk">CHF 2'270</span></span><span class="lb">Pensionskasse — 2. Säule, lebenslang</span></div>
         <div class="row"><span class="dot" style="background:var(--s3a)"></span><span><span class="v" id="b-v-s3a">CHF 710</span></span><span class="lb">Säule 3a — privat, Kapitalbezug</span></div>
         <div class="row"><span class="dot" style="background:var(--s3b)"></span><span><span class="v" id="b-v-s3b">CHF 0</span></span><span class="lb">Weiteres Vermögen (3b) — Kapitalbezug</span></div>
-        <div class="row"><span class="dot" style="background:var(--foreign)"></span><span><span class="v" id="b-v-aus">CHF 610</span></span><span class="lb">Ausländische Rente</span></div>
+        <div class="row row-ausland"><span class="dot" style="background:var(--foreign)"></span><span><span class="v" id="b-v-aus">CHF 610</span></span><span class="lb">Ausländische Rente</span></div>
       </div>
       <div id="result-story" class="story"></div>
       <p class="note3a">Ein wichtiger Unterschied: AHV und Pensionskasse zahlen dir eine <b>lebenslange</b> Rente — sie fliesst, solange du lebst. Deine Säule 3a und weiteres Vermögen sind dagegen ein <b>Kapital</b>, das du im Alter aufbrauchst. Damit es mit den Renten vergleichbar wird, teilen wir dieses Kapital gleichmässig auf die Jahre bis Alter <input id="bezugAlter" class="inline-num" type="number" value="90" min="70" max="105"> auf — ein üblicher Planungshorizont, den du hier anpassen kannst. Wirst du älter, ist dieser Teil irgendwann aufgebraucht (AHV und PK laufen weiter); wirst du weniger alt, bleibt Kapital übrig, das vererbt werden kann. Es bleibt eine Annahme, kein fixer Wert.</p>
@@ -342,7 +374,7 @@
         <div class="row"><span class="dot" style="background:var(--pk)"></span><span class="lb">Pensionskasse</span><span class="ra"><span class="b0" id="s0-v-pk">CHF 2'270</span><span class="arr" id="arr-pk"> → </span><span class="v" id="s-v-pk">2'270</span></span></div>
         <div class="row"><span class="dot" style="background:var(--s3a)"></span><span class="lb">Säule 3a</span><span class="ra"><span class="b0" id="s0-v-s3a">CHF 710</span><span class="arr" id="arr-s3a"> → </span><span class="v" id="s-v-s3a">710</span></span></div>
         <div class="row"><span class="dot" style="background:var(--s3b)"></span><span class="lb">Weiteres Vermögen (3b)</span><span class="ra"><span class="b0" id="s0-v-s3b">CHF 0</span><span class="arr" id="arr-s3b"> → </span><span class="v" id="s-v-s3b">0</span></span></div>
-        <div class="row"><span class="dot" style="background:var(--foreign)"></span><span class="lb">Ausländische Rente</span><span class="ra"><span class="b0" id="s0-v-aus">CHF 610</span><span class="arr" id="arr-aus"> → </span><span class="v" id="s-v-aus">610</span></span></div>
+        <div class="row row-ausland"><span class="dot" style="background:var(--foreign)"></span><span class="lb">Ausländische Rente</span><span class="ra"><span class="b0" id="s0-v-aus">CHF 610</span><span class="arr" id="arr-aus"> → </span><span class="v" id="s-v-aus">610</span></span></div>
       </div>
       <p class="framing">Für einen gleichbleibenden Lebensstandard brauchst du rund 80% deines Bruttolohns:</p>
       <div class="cmp">
@@ -427,10 +459,11 @@ function grp(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
 function chf(v){return "CHF "+grp(Math.round(v/10)*10);}
 function setTxt(id,v){const e=$(id);if(e)e.textContent=v;}
 let strat=0.025;
+let auslandJa=true;
 function s3aRente(kap,beitrag,rate,n,months){const fv=(rate===0)?n:(Math.pow(1+rate,n)-1)/rate;return (kap*Math.pow(1+rate,n)+Math.min(beitrag,A.s3aMax)*fv)/months;}
 
 function computeWith(p){
-  const alter=val('alter'),lohn=val('lohn'),ahv65=val('ahv65'),ausland=val('ausland'),pkRente=val('pkrente'),s3aKap=val('s3akap'),s3bKap=val('s3b');
+  const alter=val('alter'),lohn=val('lohn'),ahv65=val('ahv65'),ausland=auslandJa?val('ausland'):0,pkRente=val('pkrente'),s3aKap=val('s3akap'),s3bKap=val('s3b');
   const pensAlter=p.pensAlter,beitrag=Math.min(p.beitrag,A.s3aMax),einkauf=p.einkauf,nachJ=p.nachJ,r=p.strat;
   const bezugAlter=parseInt($('bezugAlter').value)||A.bezugAlter;
   const jahre=pensAlter-alter,months=Math.max(12,(bezugAlter-pensAlter)*12);
@@ -495,6 +528,20 @@ function scenarioStory(scen,base){
   s+= scen.luecke>0 ? ' Deine Lücke beträgt noch <b>'+chf(scen.luecke)+'</b>.' : ' <b>Damit ist deine Lücke geschlossen.</b>';
   return s+'</p>';
 }
+function estAHV(){
+  const lohn=val('lohn')*12, eintritt=parseInt($('eintritt-ahv').value)||25;
+  const voll=Math.max(1260,Math.min(2520,1260+1260*lohn/90720));
+  const jahre=Math.max(0,Math.min(44,65-Math.max(21,eintritt)));
+  return voll*jahre/44;
+}
+function estPK(){
+  const lohn=val('lohn')*12, eintritt=parseInt($('eintritt-pk').value)||25;
+  const insured=Math.max(0,lohn-26460), jahre=Math.max(0,65-Math.max(20,eintritt));
+  return insured*0.16*jahre*0.058/12;
+}
+function renderEstim(){var a=$('est-ahv');if(a)a.textContent=chf(estAHV());var p=$('est-pk');if(p)p.textContent=chf(estPK());}
+function applyEstim(which){ if(which==='ahv'){$('ahv65').value=Math.round(estAHV()/10)*10;} else {$('pkrente').value=Math.round(estPK()/10)*10;} render(); }
+function setAusland(ja){auslandJa=ja;document.querySelectorAll('#ausland-toggle button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.a==='ja')===ja?'true':'false'));$('ausland-field').style.display=ja?'':'none';render();}
 function beforeAfter(key,before,after){
   const b0=$('s0-v-'+key),arr=$('arr-'+key),v=$('s-v-'+key);
   b0.textContent=chf(before);
@@ -515,6 +562,8 @@ function render(){
   setTxt('lv-einkauf',chf(scen.einkauf));
   const nj=parseInt($('r-ahvnach').value)||0;setTxt('lv-ahvnach',nj+(nj===1?' Jahr':' Jahre'));
   $('result-story').innerHTML=resultStory(base);
+  document.querySelectorAll('.row-ausland').forEach(function(r){r.style.display=auslandJa?'':'none';});
+  renderEstim();
   setTxt('oc-age','mit '+scen.pensAlter);
   setTxt('oc-ahvnach',nj+(nj===1?' Jahr':' Jahre'));
   setTxt('oc-einkauf',chf(scen.einkauf));
@@ -549,6 +598,8 @@ function resetScenario(){$('r-age').value=65;$('r-einkauf').value=0;$('r-ahvnach
 ['alter','lohn','ahv65','ausland','pkrente','s3akap','s3b','bezugAlter'].forEach(id=>$(id).addEventListener('input',render));
 ['r-age','r-beitrag','r-einkauf','r-ahvnach'].forEach(id=>$(id).addEventListener('input',render));
 $('s3abeitrag').addEventListener('input',()=>{syncBeitragSlider();render();});
+['eintritt-ahv','eintritt-pk'].forEach(id=>{var e=$(id);if(e)e.addEventListener('input',renderEstim);});
+document.querySelectorAll('#ausland-toggle button').forEach(b=>b.addEventListener('click',()=>setAusland(b.dataset.a==='ja')));
 document.querySelectorAll('#r-strat button').forEach(b=>b.addEventListener('click',()=>{setStrat(parseFloat(b.dataset.r));render();}));
 
 // einfache Wisch-Navigation (Grundzug — in Claude Design verfeinerbar)
