@@ -130,6 +130,41 @@
   .btn{font-family:var(--sans);font-size:14px;font-weight:600;border-radius:11px;padding:11px 18px;cursor:pointer;border:1.5px solid var(--line2);background:var(--surface);color:var(--ink);}
   .btn-next{background:var(--ahv);color:#fff;border-color:var(--ahv);margin-left:auto;}
   .btn-back,.btn-reset{color:var(--soft);}
+  .hc-lead{font-size:14px;color:var(--soft);margin:6px 0 2px;}
+  .hc-lead b{font-family:var(--serif);font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums;}
+  .hc-arrow{color:var(--faint);}
+  .rows-compare .row{grid-template-columns:13px 1fr auto;gap:12px;align-items:baseline;}
+  .rows-compare .lb{color:var(--ink);}
+  .ra{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .ra .arr{color:var(--faint);}
+  .scenario-story{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
+  .scenario-story p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.55;}
+  .scenario-story b{font-weight:600;}
+  .opt-h{font-family:var(--serif);font-size:18px;font-weight:600;margin:28px 0 12px;}
+  .opt-cards{display:flex;flex-direction:column;gap:10px;}
+  .opt-card{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:13px;padding:15px 17px;cursor:pointer;font-family:var(--sans);transition:border-color .15s,background .15s;}
+  .opt-card:hover{border-color:var(--line2);}
+  .opt-card .oc-label{font-size:14.5px;font-weight:600;color:var(--ink);}
+  .opt-card .oc-val{font-size:14px;color:var(--soft);font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:9px;}
+  .opt-card .oc-arrow{color:var(--faint);font-size:18px;}
+  .opt-card .oc-tag{display:none;font-size:10.5px;font-weight:700;color:#fff;background:var(--ahv);border-radius:5px;padding:1px 6px;letter-spacing:.3px;}
+  .opt-card.changed{border-color:var(--ahv);background:rgba(18,86,75,.045);}
+  .opt-card.changed .oc-val{color:var(--ahv);font-weight:600;}
+  .opt-card.changed .oc-tag{display:inline-block;}
+  .sheet-overlay{position:fixed;inset:0;background:rgba(35,32,27,.22);display:none;z-index:100;align-items:flex-end;justify-content:center;}
+  .sheet-overlay.open{display:flex;}
+  .sheet{background:var(--surface);width:100%;max-width:620px;border-radius:22px 22px 0 0;padding:12px 24px 26px;box-shadow:0 -10px 40px rgba(35,32,27,.22);max-height:80vh;overflow:auto;animation:sheetup .32s cubic-bezier(.2,.7,.2,1);}
+  @keyframes sheetup{from{transform:translateY(40px);opacity:.4;}to{transform:none;opacity:1;}}
+  @media(prefers-reduced-motion:reduce){.sheet{animation:none;}}
+  .sheet-handle{width:42px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 8px;}
+  .sheet-close{display:block;margin-left:auto;background:none;border:none;color:var(--soft);font-size:13px;font-weight:600;cursor:pointer;padding:4px;}
+  .sheet-panel{display:none;}
+  .sheet-panel.active{display:block;}
+  .sheet-panel h3{font-family:var(--serif);font-size:20px;font-weight:600;margin:2px 0 10px;}
+  .sheet-panel>p{font-size:14.5px;color:var(--ink);line-height:1.55;margin:0 0 16px;max-width:60ch;}
+  .sheet-echo{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);}
+  .sheet-echo b{font-family:var(--serif);color:var(--ahv);font-variant-numeric:tabular-nums;font-size:16px;}
+  .sheet-echo b.neg{color:var(--gap);}
   .footer{margin-top:34px;font-size:11.5px;color:var(--faint);line-height:1.6;padding-top:20px;border-top:1px solid var(--line);}
   .footer b{color:var(--soft);}
 </style>
@@ -290,47 +325,93 @@
   <!-- TEIL 3 -->
   <section class="step" data-step="2">
     <h2>Szenarien</h2>
-    <p class="scenhint">Du kennst deine Ausgangslage. Jetzt bist du dran: Verändere die Hebel — von <b>wenig</b> Einfluss (AHV) bis <b>viel</b> (Säule 3a) — und sieh oben sofort, was sich bewegt. Oft ändert nur eine Säule. Mit „Zurücksetzen" kommst du jederzeit zur Ausgangslage zurück.</p>
-    <div class="scenario-result">
-      <div class="sr-top">
-        <div><div class="lead" style="font-size:12px;color:var(--soft)">Rente ab <span id="s-age">65</span></div><div class="amt-sm"><span class="c">CHF</span><span id="s-brutto">5'250</span><span class="permo">/Mt.</span></div><div class="n" style="font-size:12px;color:var(--faint)">netto rund <span id="s-netto">CHF 4'620</span></div></div>
-        <div class="sr-gap"><div class="lead" style="font-size:12px;color:var(--soft)">Lücke</div><div class="amt-sm"><span id="s-g-luecke">CHF 1'150</span></div></div>
+    <p class="scenhint">Du kennst deine Ausgangslage. Öffne unten eine Möglichkeit, verändere sie — und sieh oben sofort, was sich bewegt.</p>
+
+    <div class="resultbox">
+      <div class="hero">
+        <div class="lead">Voraussichtlich verfügbar ab der Pensionierung mit <span id="s-age">65</span></div>
+        <div class="hc-lead" id="hc-lead">Ausgangslage <b id="s0-brutto">CHF 5'250</b> <span class="hc-arrow">→</span></div>
+        <div class="amt"><span class="c">CHF</span><span id="s-brutto">5'250</span></div>
+        <div class="u">brutto pro Monat</div>
+        <div class="n">nach Steuern rund <span id="s-netto">CHF 4'620</span> netto</div>
       </div>
+      <p class="framing">So verteilt sich deine Rente auf die Quellen:</p>
       <div class="bar" id="s-bar"><span style="width:31.6%;background:var(--ahv)"></span><span style="width:43.2%;background:var(--pk)"></span><span style="width:13.5%;background:var(--s3a)"></span><span style="width:0%;background:var(--s3b)"></span><span style="width:11.7%;background:var(--foreign)"></span></div>
-      <div class="sr-legend">
-        <span><i style="background:var(--ahv)"></i>AHV <b id="s-v-ahv">CHF 1'660</b></span>
-        <span><i style="background:var(--pk)"></i>PK <b id="s-v-pk">CHF 2'270</b></span>
-        <span><i style="background:var(--s3a)"></i>3a <b id="s-v-s3a">CHF 710</b></span>
-        <span><i style="background:var(--s3b)"></i>3b <b id="s-v-s3b">CHF 0</b></span>
-        <span><i style="background:var(--foreign)"></i>Ausland <b id="s-v-aus">CHF 610</b></span>
+      <div class="rows rows-compare">
+        <div class="row"><span class="dot" style="background:var(--ahv)"></span><span class="lb">AHV</span><span class="ra"><span class="b0" id="s0-v-ahv">CHF 1'660</span><span class="arr" id="arr-ahv"> → </span><span class="v" id="s-v-ahv">1'660</span></span></div>
+        <div class="row"><span class="dot" style="background:var(--pk)"></span><span class="lb">Pensionskasse</span><span class="ra"><span class="b0" id="s0-v-pk">CHF 2'270</span><span class="arr" id="arr-pk"> → </span><span class="v" id="s-v-pk">2'270</span></span></div>
+        <div class="row"><span class="dot" style="background:var(--s3a)"></span><span class="lb">Säule 3a</span><span class="ra"><span class="b0" id="s0-v-s3a">CHF 710</span><span class="arr" id="arr-s3a"> → </span><span class="v" id="s-v-s3a">710</span></span></div>
+        <div class="row"><span class="dot" style="background:var(--s3b)"></span><span class="lb">Weiteres Vermögen (3b)</span><span class="ra"><span class="b0" id="s0-v-s3b">CHF 0</span><span class="arr" id="arr-s3b"> → </span><span class="v" id="s-v-s3b">0</span></span></div>
+        <div class="row"><span class="dot" style="background:var(--foreign)"></span><span class="lb">Ausländische Rente</span><span class="ra"><span class="b0" id="s0-v-aus">CHF 610</span><span class="arr" id="arr-aus"> → </span><span class="v" id="s-v-aus">610</span></span></div>
       </div>
+      <p class="framing">Für einen gleichbleibenden Lebensstandard brauchst du rund 80% deines Bruttolohns:</p>
+      <div class="cmp">
+        <div class="cmprow"><div class="cmplab">Voraussichtliche Rente</div><div class="cmpbar"><span class="cmpfill" id="s-fill" style="width:82%"></span><span class="cmpshort" id="s-short" style="width:18%"></span></div><div class="cmpval" id="s-g-have">CHF 5'250</div></div>
+        <div class="cmprow"><div class="cmplab">Ziel · 80% des Lohns</div><div class="cmpbar"><span class="cmpgoal"></span></div><div class="cmpval" id="s-g-ziel">CHF 6'400</div></div>
+      </div>
+      <div class="luecke-callout">Es fehlen dir monatlich <b id="s-g-luecke">CHF 1'150</b> — das ist deine Lücke.</div>
     </div>
-      <div class="saeule">
-        <div class="shead"><span class="snum" style="background:var(--ink)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Frühpensionierung<span class="stag">der Zeitpunkt betrifft alle Säulen</span></h3></div>
-        <div class="lever"><div class="top"><span class="lab">Pensionsalter</span><span class="val" id="lv-age">65</span></div><input type="range" id="r-age" min="61" max="65" step="1" value="65"><div class="hint">Vor 63 gibt es noch keine AHV — diese Jahre musst du aus Kapital überbrücken.</div></div>
-      </div>
-      <div class="saeule">
-        <div class="shead"><span class="snum" style="background:var(--ahv)">1</span><h3>AHV<span class="stag">kaum beeinflussbar</span></h3></div>
-        <div class="lever"><div class="top"><span class="lab">Fehlende AHV-Jahre nachzahlen</span><span class="val" id="lv-ahvnach">0 Jahre</span></div><input type="range" id="r-ahvnach" min="0" max="5" step="1" value="0"><div class="hint">Nur für Beitragslücken aus Schweizer Jahren (max. 5 zurück) — nicht für die Zeit vor dem Zuzug.</div></div>
-      </div>
-      <div class="saeule">
-        <div class="shead"><span class="snum" style="background:var(--pk)">2</span><h3>Pensionskasse<span class="stag">freiwilliger Einkauf</span></h3></div>
-        <div class="lever"><div class="top"><span class="lab">Einmaliger PK-Einkauf</span><span class="val" id="lv-einkauf">CHF 0</span></div><input type="range" id="r-einkauf" min="0" max="100000" step="5000" value="0"><div class="hint">Erhöht die lebenslange Rente und senkt im Einkaufsjahr die Steuern. Danach 3 Jahre gesperrt.</div></div>
-      </div>
-      <div class="saeule">
-        <div class="shead"><span class="snum" style="background:var(--s3a)">3</span><h3>Säule 3a<span class="stag">dein grösster Spielraum</span></h3></div>
-        <div class="lever"><div class="top"><span class="lab">3a-Beitrag pro Jahr</span><span class="val" id="lv-beitrag">CHF 4'000</span></div><input type="range" id="r-beitrag" min="0" max="7258" step="50" value="4000"><div class="hint">Maximum mit PK: CHF 7'258 (2026).</div></div>
-        <div class="lever"><div class="top"><span class="lab">3a-Anlagestrategie</span></div><div class="seg" id="r-strat" role="group"><button data-r="0" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktien-lastig</button></div><div class="hint">Reale Rendite p.a.: 0% · 2,5% · 5%. Je länger dein Horizont, desto mehr Gewicht.</div></div>
-      </div>
+
+    <div class="scenario-story" id="scenario-story"></div>
+
+    <h3 class="opt-h">Was du verändern kannst</h3>
+    <div class="opt-cards">
+      <button class="opt-card" data-open="age" onclick="openSheet('age')"><span class="oc-label">Frühpensionierung</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-age">mit 65</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="ahvnach" onclick="openSheet('ahvnach')"><span class="oc-label">AHV — fehlende Jahre nachzahlen</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-ahvnach">0 Jahre</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="einkauf" onclick="openSheet('einkauf')"><span class="oc-label">Pensionskasse — Einkauf</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-einkauf">CHF 0</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="beitrag" onclick="openSheet('beitrag')"><span class="oc-label">Säule 3a — jährlicher Beitrag</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-beitrag">CHF 4'000</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="strat" onclick="openSheet('strat')"><span class="oc-label">Säule 3a — Anlagestrategie</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-strat">Ausgewogen</span><span class="oc-arrow">›</span></span></button>
+    </div>
+
     <div class="abschluss">
       <h3>Dein Rundgang ist komplett.</h3>
       <p>Du weisst jetzt, wie viel dir im Alter bleibt, woraus sich deine Rente zusammensetzt — und an welchen Hebeln du drehen kannst. Die AHV steht weitgehend fest, aber bei der Pensionskasse und vor allem der Säule 3a hast du es selbst in der Hand.</p>
     </div>
+
     <div class="nav"><button class="btn btn-back" onclick="go(1)">← Zurück</button><button class="btn btn-reset" onclick="resetScenario()">↺ Zurücksetzen</button></div>
   </section>
 
   <div class="footer"><b>Rechengrundlage.</b> Alle Beträge real (heutige Kaufkraft). AHV und PK direkt aus den offiziellen Unterlagen. 3a real aufgezinst bis zur Pensionierung, danach linearer Bezug bis Alter 90. Steuern pauschal am Schluss.<br><b>Beispieldaten.</b> Prototyp zur Illustration. Keine Finanz-, Steuer- oder Anlageberatung.</div>
 
+</div>
+
+<div class="sheet-overlay" id="overlay" onclick="if(event.target===this)closeSheet()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" onclick="closeSheet()">Schliessen ✕</button>
+
+    <div class="sheet-panel" id="panel-age">
+      <h3>Frühpensionierung</h3>
+      <p>Früher aufhören kürzt AHV und Pensionskasse <b>lebenslang</b> und lässt der Säule 3a weniger Zeit zu wachsen. Wichtig: <b>Vor 63 gibt es noch gar keine AHV</b> — diese Jahre musst du vollständig aus eigenem Kapital überbrücken.</p>
+      <div class="lever"><div class="top"><span class="lab">Pensionsalter</span><span class="val" id="lv-age">65</span></div><input type="range" id="r-age" min="61" max="65" step="1" value="65"></div>
+    </div>
+
+    <div class="sheet-panel" id="panel-ahvnach">
+      <h3>AHV — fehlende Jahre nachzahlen</h3>
+      <p>Die AHV kannst du kaum beeinflussen. Die eine Ausnahme: Beitragslücken der <b>letzten fünf Jahre</b> kannst du nachzahlen — aber nur für Jahre, in denen du bereits in der Schweiz AHV-pflichtig warst. <b>Jahre vor einem Zuzug aus dem Ausland lassen sich nicht nachkaufen.</b></p>
+      <div class="lever"><div class="top"><span class="lab">Nachgezahlte Jahre</span><span class="val" id="lv-ahvnach">0 Jahre</span></div><input type="range" id="r-ahvnach" min="0" max="5" step="1" value="0"></div>
+    </div>
+
+    <div class="sheet-panel" id="panel-einkauf">
+      <h3>Pensionskasse — freiwilliger Einkauf</h3>
+      <p>Mit einem freiwilligen Einkauf zahlst du zusätzliches Kapital in die Pensionskasse ein. Das <b>erhöht deine lebenslange Rente</b> und senkt im Einkaufsjahr deine Steuern. Beachte: Nach einem Einkauf ist das Kapital drei Jahre gesperrt (kein Kapitalbezug).</p>
+      <div class="lever"><div class="top"><span class="lab">Einmaliger Einkauf</span><span class="val" id="lv-einkauf">CHF 0</span></div><input type="range" id="r-einkauf" min="0" max="100000" step="5000" value="0"></div>
+    </div>
+
+    <div class="sheet-panel" id="panel-beitrag">
+      <h3>Säule 3a — jährlicher Beitrag</h3>
+      <p>Wie viel du jährlich in die Säule 3a einzahlst, hast du selbst in der Hand. Das Maximum mit Pensionskasse liegt 2026 bei <b>CHF 7'258</b> — voll ausgeschöpft bringt das über die Jahre spürbar mehr Kapital, plus jährliche Steuerersparnis.</p>
+      <div class="lever"><div class="top"><span class="lab">Beitrag pro Jahr</span><span class="val" id="lv-beitrag">CHF 4'000</span></div><input type="range" id="r-beitrag" min="0" max="7258" step="50" value="4000"></div>
+    </div>
+
+    <div class="sheet-panel" id="panel-strat">
+      <h3>Säule 3a — Anlagestrategie</h3>
+      <p>Dein 3a-Guthaben lässt sich unterschiedlich anlegen — je höher der Aktienanteil, desto höher die erwartete Rendite, aber auch die Schwankung. Über einen langen Horizont lohnt sich ein höherer Aktienanteil oft; Kursrückgänge waren historisch meist vorübergehend (eine Garantie ist das nicht).</p>
+      <div class="lever"><div class="top"><span class="lab">Strategie</span></div><div class="seg" id="r-strat" role="group"><button data-r="0" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktien-lastig</button></div><div class="hint">Reale Rendite p.a.: 0% · 2,5% · 5%.</div></div>
+    </div>
+
+    <div class="sheet-echo">Mit dieser Einstellung: <b id="m-brutto">CHF 5'250</b> / Mt. · Lücke <b id="m-luecke" class="neg">CHF 1'150</b></div>
+  </div>
 </div>
 
 <script>
@@ -398,6 +479,34 @@ function resultStory(d){
     +'<p>Zusammen mit der Säule 3a'+extra+' kommst du auf deine <b>Gesamtrente von '+chf(d.brutto)+'</b> pro Monat.</p>'
     +'<p>Für die <b>Säule 3a</b> haben wir mit der mittleren, ausgewogenen Anlagestrategie gerechnet — rund 2,5% reale Rendite pro Jahr. Eine vorsichtigere oder mutigere Strategie verändert diese Zahl spürbar; das kannst du gleich in den Szenarien ausprobieren.</p>';
 }
+function openSheet(key){document.querySelectorAll('.sheet-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+key));$('overlay').classList.add('open');}
+function closeSheet(){$('overlay').classList.remove('open');}
+function setChanged(key,on){const c=document.querySelector('.opt-card[data-open="'+key+'"]');if(c)c.classList.toggle('changed',on);}
+function scenarioStory(scen,base){
+  const parts=[];
+  const age=parseInt($('r-age').value); if(age!==65) parts.push('Pensionierung mit '+age);
+  const nj=parseInt($('r-ahvnach').value)||0; if(nj>0) parts.push(nj+(nj===1?' Jahr':' Jahre')+' AHV nachgezahlt');
+  const ek=parseFloat($('r-einkauf').value); if(ek>0) parts.push('PK-Einkauf von CHF '+grp(ek));
+  const be=parseFloat($('r-beitrag').value), beDef=Math.min(val('s3abeitrag'),A.s3aMax); if(Math.abs(be-beDef)>1) parts.push('3a-Beitrag CHF '+grp(be)+'/Jahr');
+  if(strat!==0.025) parts.push(strat===0?'Anlage: Konto/Versicherung':'aktienlastige 3a-Anlage');
+  if(parts.length===0) return '<p>Noch hast du nichts verändert. Öffne unten eine Möglichkeit — dein Ergebnis oben passt sich sofort an.</p>';
+  const diff=scen.brutto-base.brutto, dir=diff>=0?'mehr':'weniger';
+  let s='<p>Mit deinen Anpassungen — <b>'+parts.join(', ')+'</b> — kommst du jetzt auf <b>'+chf(scen.brutto)+'</b> pro Monat, rund <b>'+chf(Math.abs(diff))+' '+dir+'</b> als in deiner Ausgangslage.';
+  s+= scen.luecke>0 ? ' Deine Lücke beträgt noch <b>'+chf(scen.luecke)+'</b>.' : ' <b>Damit ist deine Lücke geschlossen.</b>';
+  return s+'</p>';
+}
+function beforeAfter(key,before,after){
+  const b0=$('s0-v-'+key),arr=$('arr-'+key),v=$('s-v-'+key);
+  b0.textContent=chf(before);
+  if(Math.abs(after-before)>1){
+    b0.style.color='var(--faint)';b0.style.fontWeight='400';
+    arr.style.display='';v.style.display='';
+    v.textContent=grp(Math.round(after/10)*10);v.style.color='var(--ahv)';v.style.fontWeight='600';
+  }else{
+    b0.style.color='var(--ink)';b0.style.fontWeight='600';
+    arr.style.display='none';v.style.display='none';
+  }
+}
 function render(){
   const base=computeBase();fillResult('b',base);
   const scen=computeScenario();fillResult('s',scen);
@@ -406,6 +515,22 @@ function render(){
   setTxt('lv-einkauf',chf(scen.einkauf));
   const nj=parseInt($('r-ahvnach').value)||0;setTxt('lv-ahvnach',nj+(nj===1?' Jahr':' Jahre'));
   $('result-story').innerHTML=resultStory(base);
+  setTxt('oc-age','mit '+scen.pensAlter);
+  setTxt('oc-ahvnach',nj+(nj===1?' Jahr':' Jahre'));
+  setTxt('oc-einkauf',chf(scen.einkauf));
+  setTxt('oc-beitrag',chf(parseFloat($('r-beitrag').value)));
+  setTxt('oc-strat',strat===0?'Konto / Versicherung':strat===0.05?'Aktien-lastig':'Ausgewogen');
+  setChanged('age',scen.pensAlter!==65);
+  setChanged('ahvnach',nj>0);
+  setChanged('einkauf',scen.einkauf>0);
+  setChanged('beitrag',Math.abs(parseFloat($('r-beitrag').value)-Math.min(val('s3abeitrag'),A.s3aMax))>1);
+  setChanged('strat',strat!==0.025);
+  setTxt('m-brutto','CHF '+grp(Math.round(scen.brutto/10)*10));
+  {const ml=$('m-luecke'); if(ml){ml.textContent=scen.luecke>0?chf(scen.luecke):'keine';ml.className=scen.luecke>0?'neg':'';}}
+  $('scenario-story').innerHTML=scenarioStory(scen,base);
+  setTxt('s0-brutto',chf(base.brutto));
+  $('hc-lead').style.display=Math.abs(scen.brutto-base.brutto)>1?'':'none';
+  [['ahv',base.ahv,scen.ahv],['pk',base.pk,scen.pk],['s3a',base.s3a,scen.s3a],['s3b',base.s3b,scen.s3b],['aus',base.ausland,scen.ausland]].forEach(function(t){beforeAfter(t[0],t[1],t[2]);});
 }
 
 let step=0;
