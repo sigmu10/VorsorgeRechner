@@ -177,7 +177,7 @@
   Gestaltung frei. Rechen-Engine am Ende, bewusst geänderte Stellen sind
   mit  /* V2 */  markiert (Lücken-Text, mit/ohne 3b, Bezugsalter-Grenzen,
   Ziel 60%). Noch NICHT eingebaut, weil Entscheid mit Bruder offen:
-  13. AHV-Rente, 3a-Kapitalsteuer vor Annuität, Rendite in der Bezugsphase.
+  3a-Kapitalsteuer vor Annuität, Rendite in der Bezugsphase.
   ========================================================================
 -->
 <div class="page">
@@ -219,7 +219,7 @@
   <section class="step" data-step="1">
     <h2>1. Säule: AHV<span class="h2sub">Staatliche Vorsorge</span></h2>
     <p class="sexp">Die staatliche Vorsorge sichert den Existenzbedarf im Alter. Seit 1948 ist jede Person, die in der Schweiz lebt, in der AHV versichert — ob erwerbstätig oder nicht. Ab dem 21. Lebensjahr bis zur Pensionierung zahlst du Beiträge: <b>4,35% deines Bruttolohns</b> werden direkt abgezogen, und dein Arbeitgeber legt nochmals 4,35% dazu (2026). Wer mehr verdient, zahlt also mehr ein.</p>
-    <p class="sexp">Die Rente dagegen ist nach oben und unten begrenzt: Bei voller Beitragsdauer erhält eine alleinstehende Person mindestens <b>CHF 1'260</b> und höchstens <b>CHF 2'520</b> pro Monat, ein Ehepaar zusammen höchstens <b>CHF 3'780</b> — also 150% der Einzelrente, nicht das Doppelte (das nennt sich Plafonierung). Gutverdienende zahlen im Lauf ihres Lebens mehr ein, als sie je als Rente zurückbekommen; das ist gewollt — die AHV verteilt von oben nach unten um.</p>
+    <p class="sexp">Die Rente dagegen ist nach oben und unten begrenzt: Bei voller Beitragsdauer erhält eine alleinstehende Person mindestens <b>CHF 1'260</b> und höchstens <b>CHF 2'520</b> pro Monat, ein Ehepaar zusammen höchstens <b>CHF 3'780</b>; ab 2026 kommt jedes Jahr im Dezember eine <b>13. Rente</b> dazu — also 150% der Einzelrente, nicht das Doppelte (das nennt sich Plafonierung). Gutverdienende zahlen im Lauf ihres Lebens mehr ein, als sie je als Rente zurückbekommen; das ist gewollt — die AHV verteilt von oben nach unten um.</p>
     <p class="sexp">Sie läuft im <b>Umlageverfahren</b>: Die heute Erwerbstätigen zahlen mit ihrem Lohnabzug direkt die Renten der heutigen Pensionierten — ein Generationenvertrag, kein persönliches Konto.</p>
     <svg class="saeule-graphic" viewBox="0 0 440 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Umlageverfahren">
       <defs><marker id="ahvarr" markerWidth="8" markerHeight="8" refX="5.5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--pk)"/></marker></defs>
@@ -246,7 +246,7 @@
       <div class="bfld" id="ausland-field"><label>Rente aus dem Ausland pro Monat (geschätzt)</label><input id="ausland" type="number" value="610"><div class="swhere">Eine Näherung genügt. Die dortige Rentenversicherung zahlt sie dir später nur auf Antrag.</div></div>
     </div>
     <p class="sfind">Deine voraussichtliche AHV-Rente bekommst du <b>kostenlos über die Rentenvorausberechnung deiner Ausgleichskasse</b> (Bearbeitung ca. 3 Wochen) — fürs Erste genügt ein geschätzter Näherungswert.</p>
-    <div class="sinput"><label>AHV-Rente pro Monat (ab 65)</label><input id="ahv65" type="number" value="1660"></div>
+    <div class="sinput"><label>AHV-Rente pro Monat (ab 65)</label><input id="ahv65" type="number" value="1660"><div class="swhere">Die Monatsrente laut Vorausberechnung — die 13. Rente rechnen wir selbst dazu.</div></div>
     <details class="estim">
       <summary>Ich kenne die Zahl noch nicht — grob schätzen</summary>
       <div class="estim-body">
@@ -258,9 +258,9 @@
     </details>
     <div class="zwischen" style="--c:var(--ahv)">
       <div class="zl">Aus der 1. Säule</div>
-      <div class="za"><span class="c">CHF</span><span id="z-ahv">1'660</span><span class="u">pro Monat, lebenslang ab 65</span></div>
-      <div class="zplus" id="z-aus-wrap">Dazu kommt deine ausländische Rente von <b id="z-aus">CHF 610</b>.</div>
+      <div class="za"><span class="c">CHF</span><span id="z-ahv">1'660</span><span class="u">pro Monat, lebenslang ab 65, inkl. 13. Rente</span></div>
       <p id="z-ahv-txt"></p>
+      <p class="zplus" id="z-aus-wrap">Dazu kommt deine ausländische Rente von <b id="z-aus">CHF 610</b> — sie gleicht einen Teil davon aus.</p>
       <p class="zv">Auf diese Zahl kannst du dich verlassen: Sie ist gesetzlich festgelegt und ändert sich nur, wenn sich deine Beitragsjahre ändern.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(0)">← Zurück</button><button class="btn btn-next" onclick="go(2)">Weiter zur 2. Säule →</button></div>
@@ -494,7 +494,7 @@
    Änderungen gegenüber Prototyp v1 sind mit "V2" markiert. Alles andere ist
    deckungsgleich. Element-IDs nicht umbenennen.
    ================================================================================ */
-const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.05,pkEinkaufSatz:0.058,ahvNachzahlProJahr:57};
+const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.05,pkEinkaufSatz:0.058,ahvNachzahlProJahr:57,ahv13:13/12};
 const $=id=>document.getElementById(id);
 function val(id){return parseFloat($(id).value)||0;}
 function grp(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,"'");}
@@ -511,7 +511,7 @@ function computeWith(p){
   const pensAlter=p.pensAlter,beitrag=Math.min(p.beitrag,A.s3aMax),einkauf=p.einkauf,nachJ=p.nachJ,r=p.strat;
   const bezugAlter=Math.min(100,Math.max(pensAlter+5,parseInt($('bezugAlter').value)||A.bezugAlter)); /* V2: Grenzen */
   const jahre=pensAlter-alter,months=Math.max(12,(bezugAlter-pensAlter)*12);
-  const ahv=pensAlter<A.ahvMinAlter?0:(ahv65+nachJ*A.ahvNachzahlProJahr)*(1-A.ahvVorbezug*(65-pensAlter));
+  const ahv=pensAlter<A.ahvMinAlter?0:(ahv65+nachJ*A.ahvNachzahlProJahr)*(1-A.ahvVorbezug*(65-pensAlter))*A.ahv13; /* V2: 13. AHV-Rente auf 12 Monate verteilt */
   const pk=pkRente*(1-A.pkKuerzung*(65-pensAlter))+einkauf*A.pkEinkaufSatz/12;
   const s3a=s3aRente(s3aKap,beitrag,r,jahre,months);
   const s3b=s3bKap/months;
@@ -555,7 +555,8 @@ function zwischenTexte(d){
   setTxt('z-ahv',grp(Math.round(d.ahv/10)*10));
   setTxt('z-aus',chf(d.ausland));
   $('z-aus-wrap').style.display=(auslandJa&&d.ausland>0)?'':'none';
-  $('z-ahv-txt').innerHTML=(d.ahv>0&&d.ahv<2200)?'Das ist eine <b>Teilrente</b> — ein Zeichen fehlender Beitragsjahre, häufig bei späterem Zuzug. Umso mehr zählen die nächsten beiden Säulen.':'Das liegt nahe am Maximum — deine Beitragsjahre sind weitgehend vollständig.';
+  const teil=d.ahv>0&&d.ahv<2200*A.ahv13;
+  $('z-ahv-txt').innerHTML=teil?'Das ist eine <b>Teilrente</b> — ein Zeichen fehlender Beitragsjahre, häufig bei späterem Zuzug.'+(auslandJa&&d.ausland>0?'':' Umso mehr zählen die nächsten beiden Säulen.'):'Das liegt nahe am Maximum — deine Beitragsjahre sind weitgehend vollständig.';
   setTxt('z-pk',grp(Math.round(d.pk/10)*10));
   const pct=Math.round((d.ahv+d.pk)/lohn*100);
   let st;
