@@ -82,17 +82,8 @@
   .cmpshort{height:100%;background:repeating-linear-gradient(45deg,#F0D9CF,#F0D9CF 6px,#F7E7DE 6px,#F7E7DE 12px);transition:width .3s ease;}
   .cmpgoal{height:100%;width:100%;background:var(--ahv);opacity:.26;}
   .cmpval{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;}
-  .luecke-callout{margin-top:16px;font-size:14.5px;}
-  .luecke-callout b{font-family:var(--serif);color:var(--gap);font-size:19px;font-variant-numeric:tabular-nums;}
-  .luecke-callout.ok b{color:var(--good);}
-  .story{margin-top:22px;display:flex;flex-direction:column;gap:11px;}
-  .story p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.55;}
-  .story b{font-weight:600;}
-  .fest{margin-top:18px;background:var(--bg);border-radius:12px;padding:15px 18px;font-size:14.5px;line-height:1.6;}
-  .fest b{font-weight:600;}
-  .fest .fbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line);margin:10px 0 6px;}
-  .fest .fbar span{display:block;height:100%;}
-  .fest .flab{display:flex;justify-content:space-between;font-size:12.5px;color:var(--soft);}
+  .luecke-callout{margin-top:16px;font-size:14.5px;line-height:1.55;}
+  .luecke-callout b{font-weight:600;font-variant-numeric:tabular-nums;}
   .story-close{margin:20px 0 0;font-size:14.5px;color:var(--soft);font-style:italic;max-width:64ch;}
   .abschluss{margin-top:28px;background:linear-gradient(180deg,var(--warm),var(--surface));border:1.5px solid var(--line2);border-radius:16px;padding:22px 22px;box-shadow:0 4px 18px rgba(35,32,27,.06);}
   .abschluss h3{font-family:var(--serif);font-size:20px;font-weight:600;margin:0 0 9px;}
@@ -379,19 +370,13 @@
         <div class="row row-s3b"><span class="dot" style="background:var(--s3b)"></span><span><span class="v" id="b-v-s3b">CHF 0</span></span><span class="lb">Weiteres Vermögen (3b) — Kapitalbezug</span></div>
         <div class="row row-ausland"><span class="dot" style="background:var(--foreign)"></span><span><span class="v" id="b-v-aus">CHF 610</span></span><span class="lb">Ausländische Rente</span></div>
       </div>
-      <div id="result-story" class="story"></div>
-      <div class="fest" id="fest-box">
-        Von diesen <b id="f-brutto">CHF 5'250</b> sind rund <b id="b-fest">CHF 3'930</b> fest — AHV und Pensionskasse, beide lebenslang. Die übrigen <b id="b-geschaetzt">CHF 1'320</b> sind eine begründete Schätzung: <span id="f-txt">Sie hängen von den Märkten ab.</span> Das ist vielleicht die wichtigste Zahl auf dieser Seite: nicht die Summe, sondern welcher Teil davon trägt.
-        <div class="fbar"><span id="f-bar-fest" style="width:75%;background:var(--ahv)"></span><span id="f-bar-est" style="width:25%;background:var(--s3a)"></span></div>
-        <div class="flab"><span>fest</span><span>geschätzt</span></div>
-      </div>
       <p class="framing">Für einen gleichbleibenden Lebensstandard brauchst du im Alter rund 80% deines Bruttolohns:</p>
       <div class="cmp">
         <div class="cmprow"><div class="cmplab">Voraussichtlich verfügbar</div><div class="cmpbar"><span class="cmpfill" id="b-fill" style="width:82%"></span><span class="cmpshort" id="b-short" style="width:18%"></span></div><div class="cmpval" id="b-g-have">CHF 5'250</div></div>
         <div class="cmprow"><div class="cmplab">Ziel · 80% des Lohns</div><div class="cmpbar"><span class="cmpgoal"></span></div><div class="cmpval" id="b-g-ziel">CHF 6'400</div></div>
       </div>
       <div class="luecke-callout" id="b-g-luecke-wrap"></div>
-      <div id="b-luecke-txt" class="story"></div>
+      <div id="b-luecke-txt" class="luecke-callout" style="margin-top:6px"></div>
     </div>
     <p class="story-close">Das ist dein Bild heute — aber vieles davon ist nicht in Stein gemeisselt. Im nächsten Schritt siehst du, was passiert, wenn du an den Stellschrauben drehst.</p>
     <div class="nav"><button class="btn btn-back" onclick="go(3)">← Zurück</button><button class="btn btn-next" onclick="go(5)">Weiter zu den Szenarien →</button></div>
@@ -436,6 +421,7 @@
       <button class="opt-card" data-open="einkauf" onclick="openSheet('einkauf')"><span class="oc-label">Pensionskasse — Einkauf</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-einkauf">CHF 0</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="beitrag" onclick="openSheet('beitrag')"><span class="oc-label">Säule 3a — jährlicher Beitrag</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-beitrag">CHF 4'000</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="strat" onclick="openSheet('strat')"><span class="oc-label">Säule 3a — Anlagestrategie</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-strat">Ausgewogen</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="s3b" onclick="openSheet('s3b')"><span class="oc-label">Weiteres Vermögen (3b)</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-s3b">CHF 0</span><span class="oc-arrow">›</span></span></button>
     </div>
 
     <div class="abschluss">
@@ -485,6 +471,13 @@
       <div class="lever"><div class="top"><span class="lab">Strategie</span></div><div class="seg" id="r-strat" role="group"><button data-r="0" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktien-lastig</button></div><div class="hint">Reale Rendite p.a.: 0% · 2,5% · 5%.</div></div>
     </div>
 
+    <div class="sheet-panel" id="panel-s3b">
+      <h3>Weiteres Vermögen (3b)</h3>
+      <p>Dein übriges Erspartes ausserhalb der Vorsorge. Schalte es ein oder aus, um dein Bild mit und ohne zu sehen — oder verändere den Betrag, den du bis 65 erwartest.</p>
+      <div class="lever"><div class="top"><span class="lab">Mitrechnen?</span></div><div class="seg" id="r-s3b-mit" role="group"><button data-m="ja" aria-pressed="true">Mit</button><button data-m="nein" aria-pressed="false">Ohne</button></div></div>
+      <div class="lever" id="r-s3b-wrap"><div class="top"><span class="lab">Vermögen mit 65</span><span class="val" id="lv-s3b">CHF 0</span></div><input type="range" id="r-s3b" min="0" max="500000" step="10000" value="0"></div>
+    </div>
+
     <div class="sheet-echo">Mit dieser Einstellung: <b id="m-brutto">CHF 5'250</b> / Mt. · Lücke <b id="m-luecke" class="neg">CHF 1'150</b></div>
   </div>
 </div>
@@ -507,7 +500,7 @@ function s3aRente(kap,beitrag,rate,n,months){const fv=(rate===0)?n:(Math.pow(1+r
 
 function computeWith(p){
   const alter=val('alter'),lohn=val('lohn'),ahv65=val('ahv65'),ausland=auslandJa?val('ausland'):0,pkRente=val('pkrente'),s3aKap=val('s3akap');
-  const s3bKap=mit3b?val('s3b'):0; /* V2 */
+  const s3bKap=(p.s3b!==undefined)?p.s3b:(mit3b?val('s3b'):0); /* V2 */
   const pensAlter=p.pensAlter,beitrag=Math.min(p.beitrag,A.s3aMax),einkauf=p.einkauf,nachJ=p.nachJ,r=p.strat;
   const bezugAlter=Math.min(100,Math.max(pensAlter+5,parseInt($('bezugAlter').value)||A.bezugAlter)); /* V2: Grenzen */
   const jahre=pensAlter-alter,months=Math.max(12,(bezugAlter-pensAlter)*12);
@@ -519,7 +512,9 @@ function computeWith(p){
   return {alter,pensAlter,ahv,pk,s3a,s3b,ausland,brutto,netto:brutto*(1-A.steuersatz),ziel:lohn*A.ersatzquote,luecke:lohn*A.ersatzquote-brutto,beitrag,einkauf,r,jahre,months,s3aKap,bezugAlter};
 }
 function computeBase(){return computeWith({pensAlter:65,beitrag:val('s3abeitrag'),einkauf:0,nachJ:0,strat:0.025});}
-function computeScenario(){return computeWith({pensAlter:parseInt($('r-age').value),beitrag:parseFloat($('r-beitrag').value),einkauf:parseFloat($('r-einkauf').value),nachJ:parseInt($('r-ahvnach').value)||0,strat:strat});}
+let scenMit3b=null; /* V2: null = wie Ausgangslage */
+function scenS3b(){const m=scenMit3b===null?mit3b:scenMit3b;return m?parseFloat($('r-s3b').value)||0:0;}
+function computeScenario(){return computeWith({pensAlter:parseInt($('r-age').value),beitrag:parseFloat($('r-beitrag').value),einkauf:parseFloat($('r-einkauf').value),nachJ:parseInt($('r-ahvnach').value)||0,strat:strat,s3b:scenS3b()});}
 
 function fillResult(p,d){
   setTxt(p+'-age',d.pensAlter);
@@ -540,8 +535,8 @@ function fillResult(p,d){
 }
 
 function lueckeText(d){
-  if(d.luecke>50){const pct=Math.round(d.luecke/d.ziel*100);const q=pct<12?'eine kleine Lücke':pct<28?'eine spürbare Lücke':'eine deutliche Lücke';return '<p>Das sind etwa <b>'+pct+'%</b> deines Ziels — '+q+'. Einen Teil davon kannst du beeinflussen; im nächsten Schritt siehst du, wie viel.</p>';}
-  return '<p>Dein Einkommen liegt bei rund <b>'+Math.round(d.brutto/d.ziel*100)+'%</b> deines Ziels — eine solide Ausgangslage.</p>';
+  if(d.luecke>50){const pct=Math.round(d.luecke/d.ziel*100);const q=pct<12?'eine kleine Lücke':pct<28?'eine spürbare Lücke':'eine deutliche Lücke';return 'Das sind etwa '+pct+'% deines Ziels — '+q+'. Einen Teil davon kannst du beeinflussen; im nächsten Schritt siehst du, wie viel.';}
+  return 'Dein Einkommen liegt bei rund '+Math.round(d.brutto/d.ziel*100)+'% deines Ziels — eine solide Ausgangslage.';
 }
 
 function resultStory(d){
@@ -569,11 +564,6 @@ function zwischenTexte(d){
   setTxt('z-s3b',chf(d.s3b));
   $('z-s3b-wrap').style.display=d.s3b>0?'':'none';
   $('z-s3a-txt').innerHTML='Das ergibt sich aus deinem Kapital, deinen Beiträgen über '+d.jahre+' Jahre und rund 2,5% Rendite pro Jahr. Bei diesem Betrag hast du den grössten Spielraum — den schauen wir uns in den Szenarien an.';
-  /* fest vs. geschätzt */
-  const fest=d.ahv+d.pk, est=d.s3a+d.s3b+d.ausland;
-  setTxt('f-brutto',chf(d.brutto));setTxt('b-fest',chf(fest));setTxt('b-geschaetzt',chf(est));
-  setTxt('f-txt',d.ausland>0?'Sie hängen von den Märkten ab und davon, ob deine ausländische Rente wie erwartet ausbezahlt wird.':'Sie hängen von den Märkten ab.');
-  const t=d.brutto||1;$('f-bar-fest').style.width=(fest/t*100)+'%';$('f-bar-est').style.width=(est/t*100)+'%';
 }
 function openSheet(key){document.querySelectorAll('.sheet-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+key));$('overlay').classList.add('open');}
 function closeSheet(){$('overlay').classList.remove('open');}
@@ -585,6 +575,7 @@ function scenarioStory(scen,base){
   const ek=parseFloat($('r-einkauf').value); if(ek>0) parts.push('PK-Einkauf von CHF '+grp(ek));
   const be=parseFloat($('r-beitrag').value), beDef=Math.min(val('s3abeitrag'),A.s3aMax); if(Math.abs(be-beDef)>1) parts.push('3a-Beitrag CHF '+grp(be)+'/Jahr');
   if(strat!==0.025) parts.push(strat===0?'Anlage: Konto/Versicherung':'aktienlastige 3a-Anlage');
+  if(Math.abs(scen.s3b-base.s3b)>1) parts.push(scen.s3b>0?'weiteres Vermögen CHF '+grp(parseFloat($('r-s3b').value)):'ohne weiteres Vermögen');
   if(parts.length===0) return '<p>Noch hast du nichts verändert. Öffne unten eine Möglichkeit — dein Ergebnis oben passt sich sofort an.</p>';
   const diff=scen.brutto-base.brutto, dir=diff>=0?'mehr':'weniger';
   let s='<p>Mit deinen Anpassungen — <b>'+parts.join(', ')+'</b> — kommst du jetzt auf <b>'+chf(scen.brutto)+'</b> pro Monat, rund <b>'+chf(Math.abs(diff))+' '+dir+'</b> als in deiner Ausgangslage.';
@@ -612,7 +603,7 @@ function estS3b(){
 function renderEstim(){var a=$('est-ahv');if(a)a.textContent=chf(estAHV());var p=$('est-pk');if(p)p.textContent=chf(estPK());var b=$('est-s3b');if(b)b.textContent=chf(estS3b());}
 function applyEstim(which){ if(which==='ahv'){$('ahv65').value=Math.round(estAHV()/10)*10;} else if(which==='pk'){$('pkrente').value=Math.round(estPK()/10)*10;} else {$('s3b').value=Math.round(estS3b()/1000)*1000;} render(); }
 function setAusland(ja){auslandJa=ja;document.querySelectorAll('#ausland-toggle button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.a==='ja')===ja?'true':'false'));$('ausland-field').style.display=ja?'':'none';render();}
-function setMit3b(ja){mit3b=ja;document.querySelectorAll('#s3b-toggle button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='ja')===ja?'true':'false'));render();}
+function setMit3b(ja){mit3b=ja;scenMit3b=null;document.querySelectorAll('#s3b-toggle button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='ja')===ja?'true':'false'));render();}
 function beforeAfter(key,before,after){
   const b0=$('s0-v-'+key),arr=$('arr-'+key),v=$('s-v-'+key);
   b0.textContent=chf(before);
@@ -632,7 +623,6 @@ function render(){
   setTxt('lv-beitrag',chf(parseFloat($('r-beitrag').value)));
   setTxt('lv-einkauf',chf(scen.einkauf));
   const nj=parseInt($('r-ahvnach').value)||0;setTxt('lv-ahvnach',nj+(nj===1?' Jahr':' Jahre'));
-  $('result-story').innerHTML=resultStory(base);
   $('b-luecke-txt').innerHTML=lueckeText(base);
   zwischenTexte(base);
   document.querySelectorAll('.row-ausland').forEach(function(r){r.style.display=auslandJa?'':'none';});
@@ -651,6 +641,8 @@ function render(){
   setChanged('einkauf',scen.einkauf>0);
   setChanged('beitrag',Math.abs(parseFloat($('r-beitrag').value)-Math.min(val('s3abeitrag'),A.s3aMax))>1);
   setChanged('strat',strat!==0.025);
+  setChanged('s3b',Math.abs(scen.s3b-base.s3b)>1);
+  {const m=scenMit3b===null?mit3b:scenMit3b;setTxt('oc-s3b',m?chf(parseFloat($('r-s3b').value)||0):'ohne');setTxt('lv-s3b',chf(parseFloat($('r-s3b').value)||0));document.querySelectorAll('#r-s3b-mit button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='ja')===m?'true':'false'));$('r-s3b-wrap').style.display=m?'':'none';}
   setTxt('m-brutto','CHF '+grp(Math.round(scen.brutto/10)*10));
   {const ml=$('m-luecke'); if(ml){ml.textContent=scen.luecke>50?chf(scen.luecke):'keine';ml.className=scen.luecke>50?'neg':'';}}
   $('scenario-story').innerHTML=scenarioStory(scen,base);
@@ -673,10 +665,13 @@ document.querySelectorAll('#progress .segs button').forEach(b=>b.addEventListene
 
 function syncBeitragSlider(){$('r-beitrag').value=Math.max(0,Math.min(7258,val('s3abeitrag')));}
 function setStrat(v){strat=v;document.querySelectorAll('#r-strat button').forEach(x=>x.setAttribute('aria-pressed',parseFloat(x.dataset.r)===v?'true':'false'));}
-function resetScenario(){$('r-age').value=65;$('r-einkauf').value=0;$('r-ahvnach').value=0;syncBeitragSlider();setStrat(0.025);render();}
+function syncS3bSlider(){$('r-s3b').value=Math.max(0,Math.min(500000,val('s3b')));}
+function resetScenario(){$('r-age').value=65;$('r-einkauf').value=0;$('r-ahvnach').value=0;syncBeitragSlider();syncS3bSlider();scenMit3b=null;setStrat(0.025);render();}
 
 ['alter','lohn','ahv65','ausland','pkrente','s3akap','s3b','bezugAlter'].forEach(id=>$(id).addEventListener('input',render));
-['r-age','r-beitrag','r-einkauf','r-ahvnach'].forEach(id=>$(id).addEventListener('input',render));
+['r-age','r-beitrag','r-einkauf','r-ahvnach','r-s3b'].forEach(id=>$(id).addEventListener('input',render));
+$('s3b').addEventListener('input',syncS3bSlider);
+document.querySelectorAll('#r-s3b-mit button').forEach(b=>b.addEventListener('click',()=>{scenMit3b=b.dataset.m==='ja';render();}));
 $('s3abeitrag').addEventListener('input',()=>{syncBeitragSlider();render();});
 ['eintritt-ahv','eintritt-pk','s3b-kap','s3b-spar'].forEach(id=>{var e=$(id);if(e)e.addEventListener('input',renderEstim);});
 document.querySelectorAll('#ausland-toggle button').forEach(b=>b.addEventListener('click',()=>setAusland(b.dataset.a==='ja')));
@@ -688,7 +683,7 @@ let tx=0;
 document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
 document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>70){go(step+(dx<0?1:-1));}},{passive:true});
 
-syncBeitragSlider();go(0);render();
+syncBeitragSlider();syncS3bSlider();go(0);render();
 </script>
 </body>
 </html>
