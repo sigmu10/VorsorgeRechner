@@ -251,7 +251,7 @@
       <div class="za"><span class="c">CHF</span><span id="z-ahv">1'660</span><span class="u">pro Monat, lebenslang ab 65, inkl. 13. Rente</span></div>
       <p id="z-ahv-txt"></p>
       <p class="zplus" id="z-aus-wrap">Dazu kommt deine ausländische Rente von <b id="z-aus">CHF 610</b>. Sie gleicht einen Teil davon aus.</p>
-      <p class="zv">Auf diese Zahl kannst du dich verlassen: Sie ist gesetzlich festgelegt und ändert sich nur, wenn sich deine Beitragsjahre ändern.</p>
+      <p class="zv">Deine AHV-Rente ist eine verlässliche Zahl. Sie ist gesetzlich festgelegt und ändert sich nur, wenn sich deine Beitragsjahre ändern.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(0)">← Zurück</button><button class="btn btn-next" onclick="go(2)">Weiter zur 2. Säule →</button></div>
   </section>
@@ -290,7 +290,7 @@
       <div class="zl">Aus der 2. Säule</div>
       <div class="za"><span class="c">CHF</span><span id="z-pk">2'270</span><span class="u">pro Monat, lebenslang ab 65</span></div>
       <p id="z-pk-txt"></p>
-      <p class="zv">Diese Zahl ist eine Prognose deiner Pensionskasse. Sie hängt davon ab, wie deine Kasse das Kapital verzinst und mit welchem Satz sie es später in eine Rente umrechnet. Beides kann sich bis zur Pensionierung noch verschieben, meist um einige Prozent und nicht um die Hälfte.</p>
+      <p class="zv">Die Zahl selbst ist eine Prognose deiner Pensionskasse und damit etwas weniger fest als die AHV. Sie hängt davon ab, wie deine Kasse das Kapital verzinst und mit welchem Satz sie es später in eine Rente umrechnet. Beides kann sich bis zur Pensionierung noch verschieben, meist um einige Prozent und nicht um die Hälfte.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(1)">← Zurück</button><button class="btn btn-next" onclick="go(3)">Weiter zur 3. Säule →</button></div>
   </section>
@@ -341,7 +341,7 @@
       <div class="za"><span class="c">CHF</span><span id="z-s3a">710</span><span class="u">pro Monat, bis Alter <span id="z-bezug">90</span></span></div>
       <div class="zplus" id="z-s3b-wrap">Dazu kommen <b id="z-s3b">CHF 0</b> aus deinem weiteren Vermögen.</div>
       <p id="z-s3a-txt"></p>
-      <p class="zv">Diese Zahl ist eine Annahme, keine Zusage. Sie hängt davon ab, wie sich die Märkte über die nächsten Jahre entwickeln, und kann deutlich höher oder tiefer ausfallen. Je näher die Pensionierung rückt, desto klarer wird sie.</p>
+      <p class="zv">Gleichzeitig ist es die unsicherste der drei Zahlen. Sie ist eine Annahme und keine Zusage, weil sie davon abhängt, wie sich die Märkte über die nächsten Jahre entwickeln. Je näher die Pensionierung rückt, desto klarer wird sie.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(2)">← Zurück</button><button class="btn btn-next" onclick="go(4)">Weiter zu deinem Ergebnis →</button></div>
   </section>
@@ -550,8 +550,8 @@ function zwischenTexte(d){
   const pct=Math.round((d.ahv+d.pk)/lohn*100);
   let st;
   if(pct>=60) st='Damit ist das Ziel der ersten beiden Säulen erreicht.';
-  else if(pct>=50) st='Das ist knapp unter dem Ziel von 60%.';
-  else st='Das ist noch unter dem Ziel von 60%. Bei späterem Zuzug in die Schweiz ist das häufig so. Die 3. Säule kann einen Teil auffangen.';
+  else if(pct>=50) st='Das ist knapp unter dem Ziel von 60%. Wenn du diesen Anteil erhöhen willst, ist ein freiwilliger Einkauf in die Pensionskasse der direkteste Weg. In den Szenarien kannst du ausprobieren, was er bringt.';
+  else st='Das ist noch unter dem Ziel von 60%. Bei späterem Zuzug in die Schweiz ist das häufig so. Ein Einkauf in die Pensionskasse kann einen Teil auffangen, und die 3. Säule den Rest. In den Szenarien siehst du, wie viel.';
   $('z-pk-txt').innerHTML='AHV und Pensionskasse ergeben zusammen rund <b>'+pct+'%</b> deines Lohnes. '+st;
   setTxt('z-s3a',grp(Math.round(d.s3a/10)*10));
   setTxt('z-bezug',d.bezugAlter);
