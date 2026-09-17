@@ -24,7 +24,7 @@
   .title h2{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.4px;margin:0;line-height:1.1;}
   .title .sub{font-size:15px;color:var(--ink);margin:6px 0 0;max-width:64ch;}
   .card{background:var(--surface);border:1px solid var(--line2);border-radius:16px;padding:24px 26px;margin:18px 0 0;box-shadow:0 2px 10px rgba(35,32,27,.04);}
-  .card>.eyebrow{margin-bottom:10px;}
+  .card>.eyebrow{margin-bottom:12px;}
   .card .ct{font-family:var(--serif);font-size:20px;font-weight:600;margin:0 0 14px;letter-spacing:-.2px;}
   .card>p:last-child,.card .sexp:last-child{margin-bottom:0;}
   h2{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.2px;margin:0 0 16px;}
@@ -102,7 +102,7 @@
   .abschluss{margin-top:18px;background:var(--ahv);color:#fff;border-radius:16px;padding:24px 26px;}
   .abschluss h3{font-family:var(--serif);font-size:20px;font-weight:600;margin:0 0 9px;color:#fff;}
   .abschluss p{font-size:14.5px;color:#fff;margin:0;line-height:1.55;opacity:.95;}
-  @media(max-width:560px){.cmprow{grid-template-columns:1fr 96px;}.cmplab{grid-column:1/-1;margin-bottom:-4px;}.card,.zwischen,.resultbox{padding:20px 18px;}.title h2{font-size:26px;}}
+  @media(max-width:560px){.cmprow{grid-template-columns:1fr 96px;}.cmplab{grid-column:1/-1;margin-bottom:-4px;}.card,.zwischen,.resultbox{padding:20px 18px;}.title h2{font-size:26px;}.zwischen .za{font-size:26px;letter-spacing:-.5px;}}
 
   .estim{margin:6px 0 16px;max-width:430px;}
   .estim summary{cursor:pointer;font-size:13px;color:var(--pk);font-weight:600;list-style:none;}
@@ -209,8 +209,8 @@
 
   <!-- SCHRITT 1 · ÜBERSICHT -->
   <section class="step active" data-step="0">
-    <div class="title"><p class="eyebrow">Willkommen</p><h2>Wie viel bleibt dir im Alter?</h2></div>
-    <div class="card"><p class="eyebrow">Übersicht</p><h3 class="ct">Das Vorsorgesystem in der Schweiz</h3>
+    <div class="title"><p class="eyebrow">Übersicht</p><h2>Die drei Säulen</h2></div>
+    <div class="card"><p class="eyebrow">Das System</p>
     <p class="intro">Wovon lebst du nach der Pensionierung, wenn kein Lohn mehr kommt? Das Vorsorgesystem in der Schweiz steht auf drei Säulen: der staatlichen, der beruflichen und der privaten Vorsorge. Aus diesen drei Quellen setzt sich dein Einkommen im Alter zusammen.</p>
     <svg class="pillars-svg" viewBox="0 0 600 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Drei-Säulen-System">
       <path d="M300 8 L556 40 L44 40 Z" fill="var(--ahv)" opacity="0.14"/><rect x="44" y="40" width="512" height="15" rx="5" fill="var(--ink)" opacity="0.80"/>
@@ -233,8 +233,8 @@
 
   <!-- SCHRITT 2 · AHV -->
   <section class="step" data-step="1">
-    <div class="title"><p class="eyebrow">1. Säule</p><h2>AHV</h2><p class="sub">Staatliche Vorsorge</p></div>
-    <div class="card"><p class="eyebrow">So funktioniert die AHV</p>
+    <div class="title"><p class="eyebrow">1. Säule · Staatliche Vorsorge</p><h2>AHV</h2></div>
+    <div class="card"><p class="eyebrow">So funktioniert sie</p>
     <p class="sexp">Die staatliche Vorsorge sichert den Existenzbedarf im Alter. Seit 1948 ist jede Person in der AHV versichert, die in der Schweiz lebt. Das gilt unabhängig davon, ob sie erwerbstätig ist oder nicht. Ab dem 21. Lebensjahr bis zur Pensionierung zahlst du Beiträge. 4,35% deines Bruttolohns werden direkt abgezogen und dein Arbeitgeber legt nochmals 4,35% dazu (2026). Wer mehr verdient, zahlt also mehr ein.</p>
     <p class="sexp">Die Rente dagegen ist nach oben und unten begrenzt. Bei voller Beitragsdauer erhält eine alleinstehende Person mindestens <b>CHF 1'260</b> und höchstens <b>CHF 2'520</b> pro Monat. Ein Ehepaar erhält zusammen höchstens <b>CHF 3'780</b>. Das sind 150% der Einzelrente und nicht das Doppelte. Man nennt das Plafonierung. Ab 2026 kommt jedes Jahr im Dezember eine 13. Rente dazu. Gutverdienende zahlen im Lauf ihres Lebens mehr ein, als sie je als Rente zurückbekommen. Das ist gewollt, denn die AHV verteilt von oben nach unten um.</p>
     <p class="sexp">Sie läuft im Umlageverfahren. Die heute Erwerbstätigen zahlen mit ihrem Lohnabzug direkt die Renten der heutigen Pensionierten. Das ist ein Generationenvertrag und kein persönliches Konto.</p>
@@ -283,15 +283,14 @@
       <p id="z-ahv-13"></p>
       <p id="z-ahv-txt"></p>
       <p class="zplus" id="z-aus-wrap"></p>
-      <p class="zv">Deine AHV-Rente ist eine verlässliche Zahl. Sie ist gesetzlich festgelegt und ändert sich nur, wenn sich deine Beitragsjahre ändern.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(0)">← Zurück</button><button class="btn btn-next" onclick="go(2)">Weiter zur 2. Säule →</button></div>
   </section>
 
   <!-- SCHRITT 3 · PENSIONSKASSE -->
   <section class="step" data-step="2">
-    <div class="title"><p class="eyebrow">2. Säule</p><h2>Pensionskasse</h2><p class="sub">Berufliche Vorsorge</p></div>
-    <div class="card"><p class="eyebrow">So funktioniert die Pensionskasse</p>
+    <div class="title"><p class="eyebrow">2. Säule · Berufliche Vorsorge</p><h2>Pensionskasse</h2></div>
+    <div class="card"><p class="eyebrow">So funktioniert sie</p>
     <p class="sexp">Zusammen mit der AHV soll die Pensionskasse den gewohnten Lebensstandard ermöglichen. Das Ziel sind rund <b>60% deines letzten Lohnes</b>. Versichert bist du hier nicht automatisch. Die Pensionskasse wird ab 25 Jahren und einem Jahreslohn von CHF 22'680 (2026) obligatorisch. Wer darunter liegt oder selbständig ist, ist nicht versichert. Das ist vor allem bei kleinen Teilzeitpensen ein Problem.</p>
     <p class="sexp">Sie läuft im Kapitaldeckungsverfahren. Anders als bei der AHV spart hier jede Person ihr eigenes Kapital an. Du zahlst über die Jahre einen Teil deines Lohnes ein und dein Arbeitgeber legt mindestens gleich viel dazu. Das Guthaben wird verzinst. So wächst bis zur Pensionierung dein Alterskapital.</p>
     <svg class="saeule-graphic" viewBox="0 0 440 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kapitaldeckungsverfahren">
@@ -326,15 +325,14 @@
       <div class="zl">Aus der Pensionskasse</div>
       <div class="za"><span class="c">CHF</span><span id="z-pk">2'270</span><span class="u">pro Monat, lebenslang ab 65</span></div>
       <p id="z-pk-txt"></p>
-      <p class="zv">Die Zahl selbst ist eine Prognose deiner Pensionskasse und damit etwas weniger fest als die AHV. Sie hängt davon ab, wie deine Kasse das Kapital verzinst und mit welchem Satz sie es später in eine Rente umrechnet. Beides kann sich bis zur Pensionierung noch verschieben, meist um einige Prozent und nicht um die Hälfte.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(1)">← Zurück</button><button class="btn btn-next" onclick="go(3)">Weiter zur 3. Säule →</button></div>
   </section>
 
   <!-- SCHRITT 4 · PRIVATE VORSORGE -->
   <section class="step" data-step="3">
-    <div class="title"><p class="eyebrow">3. Säule</p><h2>Private Vorsorge</h2><p class="sub">Säule 3a und weiteres Vermögen</p></div>
-    <div class="card"><p class="eyebrow">Säule 3a</p><h3 class="ct">Gebundene Vorsorge</h3>
+    <div class="title"><p class="eyebrow">3. Säule · Private Vorsorge</p><h2>Säulen 3a und 3b</h2></div>
+    <div class="card"><p class="eyebrow">Säule 3a</p>
     <p class="sexp">Anders als die ersten beiden Säulen ist die private Vorsorge völlig freiwillig. Hier gibt es keinen Zwang. Mit der Säule 3a kannst du jährlich bis zu <b>CHF 7'258</b> (2026) auf ein privates Vorsorgekonto einzahlen und diesen Betrag vom steuerbaren Einkommen abziehen. Das Geld ist gebunden. Du kommst erst bei der Pensionierung daran. Ausnahmen sind Wohneigentum, Selbständigkeit und ein Wegzug ins Ausland. Hier hast du am meisten in der Hand, und zwar auf zwei Arten: über die Höhe deiner Einzahlungen und über die Anlageform.</p>
     <h3 class="sub-h">Die Anlageform</h3>
     <p class="sexp">Ein 3a-Guthaben lässt sich auf einem Konto halten oder in Wertschriften anlegen. Die Angebote unterscheiden sich vor allem im Aktienanteil. Je höher er ist, desto höher ist die erwartete Rendite. Grösser ist aber auch die Gefahr, dass dein Guthaben zwischendurch an Wert verliert. Über kurze Zeit ist das ein Risiko. Über zwanzig Jahre sah es bisher anders aus. Kursrückgänge waren historisch meist vorübergehend und langfristig sind die Kurse bislang immer gestiegen. Eine Garantie für die Zukunft ist das nicht. Deshalb lohnt sich ein höherer Aktienanteil oft, solange die Pensionierung noch weit weg ist. Je näher sie rückt, desto eher schichten viele in sicherere Anlagen um.</p>
@@ -356,7 +354,7 @@
     <div class="sinput" style="margin-top:14px"><label>Geplanter Beitrag pro Jahr (ab jetzt)</label><input id="s3abeitrag" type="number" value="4000"><div class="swhere">Unsicher? Nimm den Betrag, den du heute schon einzahlst.</div></div>
 
     </div>
-    <div class="card"><p class="eyebrow">Säule 3b</p><h3 class="ct">Weiteres Vermögen</h3>
+    <div class="card"><p class="eyebrow">Säule 3b</p>
     <p class="sexp">Neben der gebundenen Säule 3a gibt es noch dein übriges Erspartes: Sparkonten, Wertschriften, ein ETF-Depot, vielleicht ein Erbe oder eine Lebensversicherung mit Auszahlung. Das nennt man Säule 3b. Dazu gehört alles, was du freiwillig zurücklegst, ohne dass es gebunden ist. Steuerlich gibt es dafür keinen Abzug. Dafür kommst du jederzeit ran.</p>
     <p class="sexp">Ob du dieses Geld zur Altersvorsorge zählst, ist deine Sache. Vielleicht ist es für Wohneigentum oder als Reserve gedacht, vielleicht legst du es ohnehin fürs Alter zurück. Deshalb zeigen wir dir dein Ergebnis später in beiden Varianten, mit und ohne weiteres Vermögen. Trag hier einfach ein, was du bis 65 etwa haben wirst. Eine grobe Schätzung genügt.</p>
     <div class="sinput"><label>Weiteres Vermögen mit 65 (geschätzt)</label><input id="s3b" type="number" value="0"></div>
@@ -373,7 +371,7 @@
     </details>
 
     </div>
-    <div class="card"><p class="eyebrow">Bezug</p><h3 class="ct">Kapital statt Rente</h3>
+    <div class="card"><p class="eyebrow">Bezug</p>
     <p class="sexp">Ein wichtiger Unterschied zu den ersten beiden Säulen: AHV und Pensionskasse zahlen dir eine lebenslange Rente. Deine Säule 3a und dein weiteres Vermögen sind dagegen ein Kapital. Es wird dir bei der Pensionierung ausbezahlt und du brauchst es im Alter auf. Bei der Auszahlung der Säule 3a fällt einmalig eine Steuer an. Ihre Höhe ist je nach Kanton unterschiedlich. Was danach bleibt, teilen wir so auf die Jahre bis Alter <input id="bezugAlter" class="inline-num" type="number" value="90" min="70" max="100"> auf, dass dir jeden Monat gleich viel bleibt. Alter 90 ist ein üblicher Planungshorizont, den du hier anpassen kannst. Wirst du älter, ist dieser Teil irgendwann aufgebraucht. AHV und Pensionskasse laufen dann weiter. Wirst du weniger alt, bleibt Kapital übrig, das vererbt werden kann. Es bleibt eine Annahme und kein fixer Wert.</p>
     </div>
     <div class="zwischen" style="--c:var(--s3a)">
@@ -381,14 +379,14 @@
       <div class="za"><span class="c">CHF</span><span id="z-s3a">710</span><span class="u">pro Monat, bis Alter <span id="z-bezug">90</span></span></div>
       <div class="zplus" id="z-s3b-wrap">Dazu kommen <b id="z-s3b">CHF 0</b> aus deinem weiteren Vermögen.</div>
       <p id="z-s3a-txt"></p>
-      <p class="zv">Gleichzeitig ist es die unsicherste der drei Zahlen. Sie ist eine Annahme und keine Zusage, weil sie davon abhängt, wie sich die Märkte über die nächsten Jahre entwickeln. Je näher die Pensionierung rückt, desto klarer wird sie.</p>
+      <p class="zv">Anders als bei AHV und Pensionskasse ist diese Zahl eine Annahme und deutlich unsicherer. Sie hängt davon ab, wie sich die Märkte über die nächsten Jahre entwickeln, und kann höher oder tiefer ausfallen. Je näher die Pensionierung rückt, desto klarer wird sie.</p>
     </div>
     <div class="nav"><button class="btn btn-back" onclick="go(2)">← Zurück</button><button class="btn btn-next" onclick="go(4)">Weiter zu deinem Ergebnis →</button></div>
   </section>
 
   <!-- SCHRITT 5 · ERGEBNIS -->
   <section class="step" data-step="4">
-    <div class="title"><p class="eyebrow">Dein Ergebnis</p><h2>Dein Einkommen im Alter</h2></div>
+    <div class="title"><p class="eyebrow">Ergebnis</p><h2>Dein Einkommen im Alter</h2></div>
     <div class="toggle-row" id="s3b-toggle-wrap">
       <div class="seg sm" id="s3b-toggle" role="group"><button data-m="ja" aria-pressed="true">Mit weiterem Vermögen</button><button data-m="nein" aria-pressed="false">Ohne</button></div>
       <div class="hint">Ohne = nur deine eigentliche Vorsorge · Mit = alles, was dir im Alter zur Verfügung steht.</div>
@@ -425,7 +423,7 @@
 
   <!-- SCHRITT 6 · SZENARIEN -->
   <section class="step" data-step="5">
-    <div class="title"><p class="eyebrow">Was du verändern kannst</p><h2>Szenarien</h2><p class="sub">Du kennst deine Ausgangslage. Öffne unten eine Möglichkeit und verändere sie. Oben siehst du sofort, was sich bewegt.</p></div>
+    <div class="title"><p class="eyebrow">Szenarien</p><h2>Was du verändern kannst</h2><p class="sub">Du kennst deine Ausgangslage. Öffne unten eine Möglichkeit und verändere sie. Oben siehst du sofort, was sich bewegt.</p></div>
 
     <div class="resultbox"><p class="eyebrow">Dein Einkommen</p>
       <div class="hero">
@@ -455,8 +453,7 @@
       <div class="scenario-story" id="scenario-story"></div>
     </div>
 
-    <div class="card"><p class="eyebrow">Szenarien</p>
-    <h3 class="ct">Sechs Möglichkeiten</h3>
+    <div class="card"><p class="eyebrow">Sechs Möglichkeiten</p>
     <div class="opt-cards">
       <button class="opt-card" data-open="age" onclick="openSheet('age')"><span class="oc-label">Frühpensionierung</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-age">mit 65</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="ahvnach" onclick="openSheet('ahvnach')"><span class="oc-label">AHV: fehlende Jahre nachzahlen</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-ahvnach">0 Jahre</span><span class="oc-arrow">›</span></span></button>
@@ -594,7 +591,7 @@ function lueckeText(d){
 function zwischenTexte(d){
   const lohn=d.ziel/A.ersatzquote;
   setTxt('z-ahv',grp(Math.round(d.ahv/10)*10));
-  $('z-ahv-13').innerHTML=d.ahv>0?'Dazu kommt jedes Jahr im Dezember eine 13. Rente.':'';
+  $('z-ahv-13').innerHTML=d.ahv>0?'Jedes Jahr im Dezember erhältst du zusätzlich eine 13. Rente.':'';
   setTxt('z-aus',chf(d.ausland));
   $('z-aus-wrap').style.display=(auslandJa&&d.ausland>0)?'':'none';
   {const sum=d.ahv+d.ausland, max=2520; $('z-aus-wrap').innerHTML='Dazu kommt deine ausländische Rente von <b>'+chf(d.ausland)+'</b>. Zusammen ergibt das <b>'+chf(sum)+'</b> pro Monat. '+(sum>max*1.02?'Damit liegst du sogar über der Maximalrente der AHV.':sum>=0.85*max?'Damit erreichst du fast die Maximalrente der AHV.':'Das liegt immer noch unter der Maximalrente der AHV. Umso wichtiger sind die nächsten beiden Säulen.');}
@@ -727,9 +724,10 @@ document.querySelectorAll('#s3b-toggle button').forEach(b=>b.addEventListener('c
 document.querySelectorAll('#s3b-strat button').forEach(b=>b.addEventListener('click',()=>{s3bStrat=parseFloat(b.dataset.r);document.querySelectorAll('#s3b-strat button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));renderEstim();}));
 document.querySelectorAll('#r-strat button').forEach(b=>b.addEventListener('click',()=>{setStrat(parseFloat(b.dataset.r));render();}));
 
-let tx=0;
-document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
-document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>70){go(step+(dx<0?1:-1));}},{passive:true});
+/* Wischen: nur bei klar horizontaler Bewegung, nicht auf Reglern/Feldern, nicht im Sheet */
+let tx=0,ty=0,tOk=false;
+document.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.clientY;tOk=!e.target.closest('input,.seg,.sheet-overlay,.opt-card');},{passive:true});
+document.addEventListener('touchend',e=>{if(!tOk)return;const t=e.changedTouches[0],dx=t.clientX-tx,dy=t.clientY-ty;if(Math.abs(dx)>90&&Math.abs(dx)>2.5*Math.abs(dy)){go(step+(dx<0?1:-1));}},{passive:true});
 
 syncBeitragSlider();syncS3bSlider();go(0);render();
 </script>
