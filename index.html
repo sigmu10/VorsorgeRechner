@@ -78,8 +78,8 @@
   .hero .lead{font-size:14.5px;color:var(--ink);margin-bottom:2px;}
   .hero .amt{font-family:var(--serif);font-size:clamp(50px,13vw,78px);font-weight:600;line-height:1;letter-spacing:-2px;font-variant-numeric:tabular-nums;color:var(--ahv);}
   .hero .amt .c{font-size:.34em;color:var(--ahv);vertical-align:.42em;margin-right:.1em;font-family:var(--sans);font-weight:600;letter-spacing:0;}
-  .hero .u{font-size:14.5px;color:var(--ink);margin-top:8px;}
-  .hero .n{font-size:14.5px;color:var(--ink);margin-top:1px;}
+  .hero .amt .bu{font-family:var(--sans);font-size:14.5px;font-weight:400;color:var(--ink);letter-spacing:0;margin-left:.35em;}
+  .hero .n{font-size:14.5px;color:var(--ink);margin-top:8px;}
   .framing{font-size:14.5px;color:var(--ink);margin:20px 0 8px;max-width:66ch;}
   .bar{display:flex;height:24px;border-radius:7px;overflow:hidden;background:var(--line);margin:8px 0;}
   .bar span{display:block;height:100%;transition:width .3s ease;}
@@ -393,10 +393,9 @@
     </div>
     <div class="resultbox"><p class="eyebrow">Dein Einkommen</p>
       <div class="hero">
-        <div class="lead">Voraussichtlich verfügbar ab der Pensionierung mit <span id="b-age">65</span></div>
-        <div class="amt"><span class="c">CHF</span><span id="b-brutto">5'250</span></div>
-        <div class="u">brutto pro Monat</div>
-        <div class="n">nach Steuern rund <span id="b-netto">CHF 4'620</span> netto</div>
+        <div class="lead">Verfügbar ab der Pensionierung mit <span id="b-age">65</span></div>
+        <div class="amt"><span class="c">CHF</span><span id="b-brutto">5'250</span><span class="bu">brutto</span></div>
+        <div class="n"><span id="b-netto">CHF 4'620</span> netto, nach Steuern</div>
       </div>
       <p class="framing">So verteilt sich dein Einkommen auf die Quellen. Die Farben entsprechen den Säulen:</p>
       <div class="bar" id="b-bar"><span style="width:31.6%;background:var(--ahv)"></span><span style="width:43.2%;background:var(--pk)"></span><span style="width:13.5%;background:var(--s3a)"></span><span style="width:0%;background:var(--s3b)"></span><span style="width:11.7%;background:var(--foreign)"></span></div>
@@ -427,11 +426,10 @@
 
     <div class="resultbox"><p class="eyebrow">Dein Einkommen</p>
       <div class="hero">
-        <div class="lead">Voraussichtlich verfügbar ab der Pensionierung mit <span id="s-age">65</span></div>
+        <div class="lead">Verfügbar ab der Pensionierung mit <span id="s-age">65</span></div>
         <div class="hc-lead" id="hc-lead">Ausgangslage <b id="s0-brutto">CHF 5'250</b> <span class="hc-arrow">→</span></div>
-        <div class="amt"><span class="c">CHF</span><span id="s-brutto">5'250</span></div>
-        <div class="u">brutto pro Monat</div>
-        <div class="n">nach Steuern rund <span id="s-netto">CHF 4'620</span> netto</div>
+        <div class="amt"><span class="c">CHF</span><span id="s-brutto">5'250</span><span class="bu">brutto</span></div>
+        <div class="n"><span id="s-netto">CHF 4'620</span> netto, nach Steuern</div>
       </div>
       <p class="framing">So verteilt sich dein Einkommen auf die Quellen:</p>
       <div class="bar" id="s-bar"><span style="width:31.6%;background:var(--ahv)"></span><span style="width:43.2%;background:var(--pk)"></span><span style="width:13.5%;background:var(--s3a)"></span><span style="width:0%;background:var(--s3b)"></span><span style="width:11.7%;background:var(--foreign)"></span></div>
