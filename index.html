@@ -54,6 +54,8 @@
   .bfld label{font-size:14.5px;font-weight:600;color:var(--ink);}
   .pillars-svg{display:block;width:100%;max-width:520px;margin:4px auto 18px;}
   .sexp{font-size:14.5px;margin:0 0 15px;max-width:66ch;}
+  ul.plain{margin:0 0 15px;padding-left:22px;font-size:14.5px;line-height:1.6;max-width:66ch;}
+  ul.plain li{margin:2px 0;}
   .sinput{display:flex;flex-direction:column;gap:5px;max-width:380px;margin-bottom:4px;}
   .sinput label{font-size:14.5px;font-weight:600;}
   .sfind{font-size:14.5px;color:var(--ink);margin:2px 0 10px;max-width:66ch;line-height:1.55;}
@@ -344,7 +346,7 @@
     <div class="card"><p class="eyebrow">Säule 3a</p>
     <p class="sexp">Anders als die ersten beiden Säulen ist die private Vorsorge völlig freiwillig. Hier gibt es keinen Zwang. Mit der Säule 3a kannst du jährlich bis zu <b>CHF 7'258</b> (2026) auf ein privates Vorsorgekonto einzahlen und diesen Betrag vom steuerbaren Einkommen abziehen. Das Geld ist gebunden. Du erhältst das Geld erst bei der Pensionierung. Ausnahmen sind der Erwerb von Wohneigentum, der Schritt in die Selbständigkeit und ein Wegzug ins Ausland. Hier hast du am meisten in der Hand, und zwar auf zwei Arten: über die Höhe deiner Einzahlungen und über die Anlageform.</p>
     <h3 class="sub-h">Die Anlageform</h3>
-    <p class="sexp">Ein 3a-Guthaben lässt sich auf einem Konto halten oder in Wertschriften anlegen. Die Angebote unterscheiden sich vor allem im Aktienanteil. Je höher er ist, desto höher ist die erwartete Rendite. Grösser ist aber auch die Gefahr, dass dein Guthaben zwischendurch an Wert verliert. Über kurze Zeit ist das ein Risiko. Über zwanzig Jahre sah es bisher anders aus. Kursrückgänge waren historisch meist vorübergehend und langfristig sind die Kurse bislang immer gestiegen. Eine Garantie für die Zukunft ist das nicht. Deshalb lohnt sich ein höherer Aktienanteil oft, solange die Pensionierung noch weit weg ist. Je näher sie rückt, desto eher schichten viele in sicherere Anlagen um.</p>
+    <p class="sexp">Ein 3a-Guthaben lässt sich auf einem Konto halten, in Wertschriften anlegen oder mit einer Lebensversicherung verbinden. Bei Wertschriften unterscheiden sich die Angebote vor allem im Aktienanteil. Je höher er ist, desto höher ist die erwartete Rendite. Grösser ist aber auch die Gefahr, dass dein Guthaben zwischendurch an Wert verliert. Über kurze Zeit ist das ein Risiko. Über zwanzig Jahre sah es bisher anders aus. Kursrückgänge waren historisch meist vorübergehend und langfristig sind die Kurse bislang immer gestiegen. Eine Garantie für die Zukunft ist das nicht. Deshalb lohnt sich ein höherer Aktienanteil oft, solange die Pensionierung noch weit weg ist. Je näher sie rückt, desto eher schichten viele in sicherere Anlagen um.</p>
     <svg class="saeule-graphic" viewBox="0 0 460 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Effekt des Aktienanteils auf das Endkapital">
       <line x1="46" y1="136" x2="360" y2="136" stroke="var(--line2)" stroke-width="2"/>
       <line x1="46" y1="18" x2="46" y2="136" stroke="var(--line2)" stroke-width="2"/>
@@ -357,11 +359,11 @@
       <text x="360" y="74" class="gcap" fill="var(--pk)">ausgewogen</text>
       <text x="360" y="30" class="gcap" fill="var(--s3a)">aktienlastig</text>
     </svg>
-    <p class="sexp">Für die Rechnung nehmen wir drei Varianten an: Konto oder Versicherung mit 0,5% Rendite pro Jahr, ausgewogen mit 2,5%, aktienlastig mit 5%. Alle drei Sätze sind bewusst vorsichtig gewählt und verstehen sich ohne Abzug der Teuerung. Wähle die Variante, die deiner heutigen Anlage am nächsten kommt.</p>
+    <p class="sexp">Für die Rechnung fassen wir die Angebote in drei Gruppen zusammen. «Konto oder Versicherung» meint ein 3a-Konto oder eine klassische 3a-Lebensversicherung, beide ohne oder mit sehr wenig Aktien. Hier rechnen wir mit 0,5% Rendite pro Jahr. «Ausgewogen» meint eine Wertschriftenlösung mit einem Aktienanteil von etwa 30% bis 70%. Hier rechnen wir mit 2,5%. «Aktienlastig» meint einen Aktienanteil von über 70%. Hier rechnen wir mit 5%. Alle Sätze verstehen sich ohne Abzug der Teuerung. Hast du eine fondsgebundene Versicherung, richte dich nach dem Aktienanteil des Fonds. Wähle die Variante, die deiner heutigen Anlage am nächsten kommt.</p>
     <p class="sfind">Wie viel du bereits angespart hast, siehst du auf dem Auszug deines 3a-Kontos oder -Depots.</p>
     <div class="sinput"><label>Bereits angespartes 3a-Kapital</label><input id="s3akap" type="number" value="100000"></div>
     <div class="sinput" style="margin-top:14px"><label>Anlageform deiner Säule 3a</label><div class="seg sm" id="s3a-strat" role="group"><button data-r="0.005" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktienlastig</button></div></div>
-    <div class="sinput" style="margin-top:14px"><label>Geplanter Beitrag pro Jahr (ab jetzt)</label><div class="inrow"><input id="s3abeitrag" type="number" max="7258" value="7258"><button type="button" class="btn-max" onclick="setS3aMax()">Maximum</button></div><div class="swhere">Unsicher? Nimm den Betrag, den du heute schon einzahlst. Höchstens CHF 7'258 pro Jahr, wenn du einer Pensionskasse angehörst.</div></div>
+    <div class="sinput" style="margin-top:14px"><label>Geplanter Beitrag pro Jahr (ab jetzt)</label><div class="inrow"><input id="s3abeitrag" type="number" max="7258" value="7258"><button type="button" class="btn-max" onclick="setS3aMax()">Maximum</button></div><div class="swhere">Unsicher? Nimm den Betrag, den du heute schon einzahlst.</div></div>
 
     </div>
     <div class="card"><p class="eyebrow">Säule 3b</p>
@@ -427,6 +429,16 @@
       <div id="b-luecke-txt" class="luecke-callout" style="margin-top:6px"></div>
     </div>
 
+    <div class="card"><p class="eyebrow">Wie genau ist das Ergebnis?</p>
+    <p class="sexp">Das Ergebnis ist eine sinnvolle Näherung auf Basis deiner eingetragenen Zahlen. Wie viel dir im Alter dann tatsächlich bleibt, hängt von Entwicklungen ab, die heute niemand genau kennt:</p>
+    <ul class="plain" style="margin-bottom:0">
+      <li>wie sich dein Lohn entwickelt</li>
+      <li>mit welchem Umwandlungssatz deine Pensionskasse rechnen wird</li>
+      <li>welche Rendite deine private Vorsorge erzielt</li>
+      <li>wie hoch die Steuern an deinem Wohnort sein werden</li>
+      <li>was die Politik an AHV und Rentenalter noch ändert</li>
+    </ul>
+    </div>
     <div class="nav"><button class="btn btn-back" onclick="go(3)">← Zurück</button><button class="btn btn-next" onclick="go(5)">Weiter zu den Szenarien →</button></div>
   </section>
 
