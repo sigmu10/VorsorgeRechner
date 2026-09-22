@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#FAF6EE;--surface:#FFFFFF;--warm:#FFFDF8;--ink:#23201B;--soft:#6B6459;--faint:#9A9284;--line:#EBE4D6;--line2:#DDD4C3;--ahv:#12564B;--pk:#4E9A82;--s3a:#E0A63C;--foreign:#B3ABA0;--s3b:#8CA6B0;--gap:#CF6A45;--good:#3E8A6E;--serif:'Fraunces',Georgia,serif;--sans:'Figtree',system-ui,sans-serif;}
+  :root{--bg:#FAF6EE;--surface:#FFFFFF;--warm:#FFFDF8;--ink:#23201B;--soft:#6B6459;--faint:#9A9284;--line:#EBE4D6;--line2:#DDD4C3;--ahv:#12564B;--pk:#4E9A82;--s3a:#E0A63C;--foreign:#B3ABA0;--s3b:#EFCB7E;--gap:#CF6A45;--good:#3E8A6E;--serif:'Fraunces',Georgia,serif;--sans:'Figtree',system-ui,sans-serif;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:820px;margin:0 auto;padding:0 22px;}
@@ -35,8 +35,9 @@
   .progress .segs button{flex:1;height:8px;border:none;border-radius:4px;background:var(--line2);cursor:pointer;padding:0;transition:background .2s;}
   .progress .segs button[data-done="true"]{background:var(--c);}
   .progress .segs button[aria-current="true"]{background:var(--c);box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--c);}
-  .progress .lbl{font-size:12.5px;color:var(--soft);margin-top:8px;}
-  .progress .lbl b{font-weight:600;color:var(--ink);}
+  .plbl-m{display:none;font-size:14px;color:var(--ink);margin-top:8px;}
+  .plbl-m b{font-weight:600;}
+  @media(max-width:560px){.hdr-step{display:none;}.plbl-m{display:block;}}
 
   .step{display:none;}
   .step.active{display:block;animation:slidein .35s cubic-bezier(.2,.7,.2,1) both;}
@@ -209,6 +210,7 @@
       <button data-step="4" style="--c:var(--ink)" aria-label="Dein Ergebnis"></button>
       <button data-step="5" style="--c:var(--ink)" aria-label="Szenarien"></button>
     </div>
+    <div class="plbl-m">Schritt <b id="p-num-m">1</b> von 6 · <b id="p-name-m">Übersicht</b></div>
   </div>
 
   <!-- SCHRITT 1 · ÜBERSICHT -->
@@ -240,7 +242,7 @@
     <div class="title"><p class="eyebrow">1. Säule · Staatliche Vorsorge</p><h2>AHV</h2></div>
     <div class="card"><p class="eyebrow">So funktioniert sie</p>
     <p class="sexp">Die staatliche Vorsorge sichert den Existenzbedarf im Alter. Seit 1948 ist jede Person in der AHV versichert, die in der Schweiz lebt. Das gilt unabhängig davon, ob sie erwerbstätig ist oder nicht. Ab dem 21. Lebensjahr bis zur Pensionierung zahlst du Beiträge. 4,35% deines Bruttolohns werden direkt abgezogen und dein Arbeitgeber legt nochmals 4,35% dazu (2026). Wer mehr verdient, zahlt also mehr ein.</p>
-    <p class="sexp">Die Rente dagegen ist nach oben und unten begrenzt. Bei voller Beitragsdauer erhält eine alleinstehende Person mindestens <b>CHF 1'260</b> und höchstens <b>CHF 2'520</b> pro Monat. Ein Ehepaar erhält zusammen höchstens <b>CHF 3'780</b>. Das sind 150% der Einzelrente und nicht das Doppelte. Man nennt das Plafonierung. Ab 2026 kommt jedes Jahr im Dezember eine 13. Rente dazu. Gutverdienende zahlen im Lauf ihres Lebens mehr ein, als sie je als Rente zurückbekommen. Das ist gewollt, denn die AHV verteilt von oben nach unten um.</p>
+    <p class="sexp">Die Rente dagegen ist nach oben und unten begrenzt. Bei voller Beitragsdauer erhält eine alleinstehende Person mindestens <b>CHF 1'260</b> und höchstens <b>CHF 2'520</b> pro Monat. Ein Ehepaar erhält zusammen höchstens <b>CHF 3'780</b>. Das sind 150% der Einzelrente und nicht das Doppelte. Man nennt das Plafonierung. Ab 2026 kommt jedes Jahr im Dezember eine 13. Rente dazu. Gutverdienende zahlen im Lauf ihres Lebens mehr ein, als sie je als Rente zurückbekommen. Das ist gewollt: Die AHV nimmt eine Umverteilung von Gutverdienenden zu Personen mit tieferen Einkommen vor.</p>
     <p class="sexp">Sie läuft im Umlageverfahren. Die heute Erwerbstätigen zahlen mit ihrem Lohnabzug direkt die Renten der heutigen Pensionierten. Das ist ein Generationenvertrag und kein persönliches Konto.</p>
     <svg class="saeule-graphic" viewBox="0 0 440 132" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Umlageverfahren">
       <defs><marker id="ahvarr" markerWidth="8" markerHeight="8" refX="5.5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--pk)"/></marker></defs>
@@ -278,7 +280,7 @@
     <p class="sfind" style="margin-top:22px">Hast du vor deinem Zuzug in die Schweiz im Ausland gearbeitet? Dann fehlen dir hier Beitragsjahre, dafür hast du im früheren Land oft einen eigenen Rentenanspruch. Damit dein Bild vollständig ist, fragen wir diese Rente hier ab.</p>
     <div class="basics">
       <div class="bfld"><label>Hast du einen Rentenanspruch aus dem Ausland?</label><div class="seg" id="ausland-toggle" style="margin-top:2px;align-self:flex-start"><button data-a="nein" aria-pressed="false">Nein</button><button data-a="ja" aria-pressed="true">Ja</button></div></div>
-      <div class="bfld" id="ausland-field"><label>Rente aus dem Ausland pro Monat (geschätzt)</label><input id="ausland" type="number" value="610"><div class="swhere">Eine Näherung genügt. Die dortige Rentenversicherung zahlt sie dir später nur auf Antrag.</div></div>
+      <div class="bfld" id="ausland-field"><label>Rente aus dem Ausland pro Monat (geschätzt)</label><input id="ausland" type="number" value="200"><div class="swhere">Eine Näherung genügt. Die dortige Rentenversicherung zahlt sie dir später nur auf Antrag.</div></div>
     </div>
     </div>
     <div class="zwischen" style="--c:var(--ahv)">
@@ -309,8 +311,9 @@
       <text x="405" y="65" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">CHF</text>
       <text x="405" y="92" text-anchor="middle" class="gcap">Rente</text>
     </svg>
-    <p class="sexp">Dieses Guthaben wird dann mit einem Umwandlungssatz in eine Rente umgerechnet. Der Satz ergibt die Jahresrente. Ein Beispiel: CHF 500'000 Kapital × 5% = CHF 25'000 im Jahr, also rund CHF 2'080 im Monat. Gesetzlich vorgeschrieben sind 6,8%, allerdings nur für den Lohnteil bis CHF 90'720. Für alles darüber rechnen die Kassen meist tiefer. Deshalb landen die meisten bei 5 bis 6%. Die Rente wird lebenslang ausbezahlt, unabhängig davon, ob dein Kapital rechnerisch längst aufgebraucht ist. Wer lange lebt, bekommt also mehr zurück, als er eingezahlt hat.</p>
-    <p class="sexp">Bei der Pensionierung hast du die Wahl. Du kannst dein Alterskapital als lebenslange Rente beziehen. Du kannst es dir auch auf einmal auszahlen lassen, das nennt man Kapitalbezug. Dann liegt das ganze Guthaben bei dir und du bist selbst dafür verantwortlich, dass es bis zum Lebensende reicht. Oder du kombinierst beides und beziehst einen Teil als Rente und einen Teil als Kapital. Die Rente ist die sichere Variante, weil sie auch dann weiterläuft, wenn du sehr alt wirst. Wer länger lebt als der Durchschnitt (Männer rund 82, Frauen rund 86 Jahre), bekommt mit der Rente insgesamt mehr. Für diesen Überblick rechnen wir deshalb mit der Rente.</p>
+    <p class="sexp">Dieses Guthaben wird dann mit einem Umwandlungssatz in eine Rente umgerechnet. Dein Kapital multipliziert mit dem Umwandlungssatz ergibt deine Jahresrente. Um deine Monatsrente zu erhalten, dividieren wir die Jahresrente durch 12. Ein Beispiel: CHF 500'000 Kapital × 5% = CHF 25'000 im Jahr, also rund CHF 2'080 im Monat. Gesetzlich vorgeschrieben ist ein Umwandlungssatz von 6,8%, allerdings nur für den Lohnteil bis CHF 90'720. Für alles darüber rechnen die Kassen meist tiefer. Im Durchschnitt landen die meisten dann bei einem Umwandlungssatz von 5% bis 6%. Wir rechnen mit einem Umwandlungssatz von 5%, um auf der sicheren Seite zu sein.</p>
+    <p class="sexp">Die Rente wird lebenslang ausbezahlt, unabhängig davon, ob dein Kapital rechnerisch längst aufgebraucht ist. Wer lange lebt, bekommt also mehr zurück, als er eingezahlt hat.</p>
+    <p class="sexp">Bei der Pensionierung hast du die Wahl. Du kannst dein Alterskapital als lebenslange Rente beziehen. Du kannst es dir auch als Kapital auszahlen lassen, das nennt man Kapitalbezug. Dann liegt das Guthaben bei dir und du bist selbst dafür verantwortlich, dass es bis zum Lebensende reicht. Oder du kombinierst beides und beziehst einen Teil als Rente und einen Teil als Kapital. Wie viel du als Kapital beziehen darfst, hängt von deiner Kasse ab. Mindestens ein Viertel des obligatorischen Guthabens muss jede Kasse auszahlen, viele erlauben mehr oder das ganze Guthaben. Was bei dir gilt, steht im Reglement deiner Kasse. Die Rente ist die sichere Variante, weil sie auch dann weiterläuft, wenn du sehr alt wirst. Wer mit 65 länger lebt als der Durchschnitt (Männer bis etwa 85, Frauen bis etwa 88), bekommt mit der Rente insgesamt mehr. Für diesen Überblick rechnen wir deshalb mit der Rente.</p>
     <p class="sexp">Anders als bei der AHV kannst du hier selbst etwas beitragen. Mit einem freiwilligen Einkauf zahlst du zusätzliches Geld in deine Pensionskasse ein. Dein Alterskapital wächst, und damit auch die spätere Rente. Der Betrag lässt sich zudem vom steuerbaren Einkommen abziehen, du sparst also im Einkaufsjahr Steuern. Wie viel du einzahlen darfst, steht auf deinem Vorsorgeausweis als Einkaufspotenzial. Was ein Einkauf für dich bringt, kannst du in den Szenarien ausprobieren.</p>
     </div>
     <div class="card"><p class="eyebrow">Deine Zahl</p>
@@ -356,9 +359,9 @@
     </svg>
     <p class="sexp">Für die Rechnung nehmen wir drei Varianten an: Konto oder Versicherung mit 0,5% Rendite pro Jahr, ausgewogen mit 2,5%, aktienlastig mit 5%. Alle drei Sätze sind bewusst vorsichtig gewählt und verstehen sich ohne Abzug der Teuerung. Wähle die Variante, die deiner heutigen Anlage am nächsten kommt.</p>
     <p class="sfind">Wie viel du bereits angespart hast, siehst du auf dem Auszug deines 3a-Kontos oder -Depots.</p>
-    <div class="sinput"><label>Bereits angespartes 3a-Kapital</label><input id="s3akap" type="number" value="62000"></div>
+    <div class="sinput"><label>Bereits angespartes 3a-Kapital</label><input id="s3akap" type="number" value="100000"></div>
     <div class="sinput" style="margin-top:14px"><label>Anlageform deiner Säule 3a</label><div class="seg sm" id="s3a-strat" role="group"><button data-r="0.005" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktienlastig</button></div></div>
-    <div class="sinput" style="margin-top:14px"><label>Geplanter Beitrag pro Jahr (ab jetzt)</label><input id="s3abeitrag" type="number" value="4000"><div class="swhere">Unsicher? Nimm den Betrag, den du heute schon einzahlst.</div></div>
+    <div class="sinput" style="margin-top:14px"><label>Geplanter Beitrag pro Jahr (ab jetzt)</label><div class="inrow"><input id="s3abeitrag" type="number" max="7258" value="7258"><button type="button" class="btn-max" onclick="setS3aMax()">Maximum</button></div><div class="swhere">Unsicher? Nimm den Betrag, den du heute schon einzahlst. Höchstens CHF 7'258 pro Jahr, wenn du einer Pensionskasse angehörst.</div></div>
 
     </div>
     <div class="card"><p class="eyebrow">Säule 3b</p>
@@ -379,7 +382,7 @@
 
     </div>
     <div class="card"><p class="eyebrow">Bezug</p>
-    <p class="sexp">Ein wichtiger Unterschied zu den ersten beiden Säulen: AHV und Pensionskasse zahlen dir eine lebenslange Rente. Deine Säule 3a und dein weiteres Vermögen sind dagegen ein Kapital. Es wird dir bei der Pensionierung ausbezahlt und du brauchst es im Alter auf. Bei der Auszahlung der Säule 3a fällt einmalig eine Steuer an. Ihre Höhe hängt von Kanton, Betrag und Zivilstand ab und liegt meist zwischen 4 und 12%. Wir rechnen pauschal mit 8%. Was danach bleibt, legst du weiterhin an. Wir rechnen mit derselben Rendite wie vorher und teilen das Kapital so auf die Jahre bis Alter <input id="bezugAlter" class="inline-num" type="number" value="90" min="70" max="100"> auf, dass dir jeden Monat gleich viel bleibt. Alter 90 ist ein üblicher Planungshorizont, den du hier anpassen kannst. Wirst du älter, ist dieser Teil irgendwann aufgebraucht. AHV und Pensionskasse laufen dann weiter. Wirst du weniger alt, bleibt Kapital übrig, das vererbt werden kann. Es bleibt eine Annahme und kein fixer Wert.</p>
+    <p class="sexp">Ein wichtiger Unterschied zu den ersten beiden Säulen: AHV und Pensionskasse zahlen dir eine lebenslange Rente. Deine Säule 3a und dein weiteres Vermögen sind dagegen ein Kapital. Es wird dir bei der Pensionierung ausbezahlt und du brauchst es im Alter auf. Bei der Auszahlung der Säule 3a fällt einmalig eine Steuer an. Ihre Höhe hängt von Kanton, Betrag und Zivilstand ab und liegt meist zwischen 4 und 12%. Wir rechnen pauschal mit 8%. Was danach bleibt, legst du weiterhin an. Nach der Pensionierung rechnen wir vorsichtiger, mit der halben Rendite, und teilen das Kapital so auf die Jahre bis Alter <input id="bezugAlter" class="inline-num" type="number" value="90" min="70" max="100"> auf, dass dir jeden Monat gleich viel bleibt. Wer heute 65 wird, lebt im Durchschnitt bis etwa 85 (Männer) oder 88 (Frauen). Alter 90 lässt eine Reserve und ist ein üblicher Planungshorizont, den du hier anpassen kannst. Wirst du älter, ist dieser Teil irgendwann aufgebraucht. AHV und Pensionskasse laufen dann weiter. Wirst du weniger alt, bleibt Kapital übrig, das vererbt werden kann. Es bleibt eine Annahme und kein fixer Wert.</p>
     </div>
     <div class="zwischen" style="--c:var(--s3a)">
       <div class="zl">Aus der privaten Vorsorge</div>
@@ -395,8 +398,8 @@
   <section class="step" data-step="4">
     <div class="title"><p class="eyebrow">Ergebnis</p><h2>Dein Einkommen im Alter</h2></div>
     <div class="toggle-row" id="s3b-toggle-wrap">
-      <div class="seg sm" id="s3b-toggle" role="group"><button data-m="ja" aria-pressed="true">Mit weiterem Vermögen</button><button data-m="nein" aria-pressed="false">Ohne</button></div>
-      <div class="hint">Ohne = nur deine eigentliche Vorsorge · Mit = alles, was dir im Alter zur Verfügung steht.</div>
+      <div class="seg sm" id="s3b-toggle" role="group"><button data-m="ja" aria-pressed="true">Mit</button><button data-m="nein" aria-pressed="false">Ohne</button></div><span class="hint" style="margin:0">weiteres Vermögen</span>
+      <div class="hint" style="flex-basis:100%">Mit = alles, was dir im Alter zur Verfügung steht · Ohne = nur deine eigentliche Vorsorge.</div>
     </div>
     <div class="resultbox"><p class="eyebrow">Dein Einkommen</p>
       <div class="hero">
@@ -430,6 +433,9 @@
   <!-- SCHRITT 6 · SZENARIEN -->
   <section class="step" data-step="5">
     <div class="title"><p class="eyebrow">Szenarien</p><h2>Was du verändern kannst</h2><p class="sub">Du kennst deine Ausgangslage. Öffne unten eine Möglichkeit und verändere sie. Oben siehst du sofort, was sich bewegt.</p></div>
+    <div class="toggle-row" id="s3b-toggle-wrap-s">
+      <div class="seg sm" id="s3b-toggle-s" role="group"><button data-m="ja" aria-pressed="true">Mit</button><button data-m="nein" aria-pressed="false">Ohne</button></div><span class="hint" style="margin:0">weiteres Vermögen</span>
+    </div>
 
     <div class="resultbox"><p class="eyebrow">Dein Einkommen</p>
       <div class="hero">
@@ -463,7 +469,7 @@
       <button class="opt-card" data-open="age" onclick="openSheet('age')"><span class="oc-label">Frühpensionierung</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-age">mit 65</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="ahvnach" onclick="openSheet('ahvnach')"><span class="oc-label">AHV: fehlende Jahre nachzahlen</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-ahvnach">0 Jahre</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="einkauf" onclick="openSheet('einkauf')"><span class="oc-label">Pensionskasse: Einkauf</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-einkauf">CHF 0</span><span class="oc-arrow">›</span></span></button>
-      <button class="opt-card" data-open="beitrag" onclick="openSheet('beitrag')"><span class="oc-label">Säule 3a: jährlicher Beitrag</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-beitrag">CHF 4'000</span><span class="oc-arrow">›</span></span></button>
+      <button class="opt-card" data-open="beitrag" onclick="openSheet('beitrag')"><span class="oc-label">Säule 3a: jährlicher Beitrag</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-beitrag">CHF 7'258</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="strat" onclick="openSheet('strat')"><span class="oc-label">Säule 3a: Anlagestrategie</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-strat">Ausgewogen</span><span class="oc-arrow">›</span></span></button>
       <button class="opt-card" data-open="s3b" onclick="openSheet('s3b')"><span class="oc-label">Weiteres Vermögen (3b)</span><span class="oc-val"><span class="oc-tag">geändert</span><span id="oc-s3b">CHF 0</span><span class="oc-arrow">›</span></span></button>
     </div>
@@ -507,27 +513,27 @@
 
     <div class="sheet-panel" id="panel-einkauf">
       <h3>Pensionskasse: freiwilliger Einkauf</h3>
-      <p>Mit einem freiwilligen Einkauf zahlst du zusätzliches Kapital in die Pensionskasse ein. Das <b>erhöht deine lebenslange Rente</b> und senkt im Einkaufsjahr deine Steuern. Wie viel Rente ein Einkauf bringt, hängt von deiner Kasse ab. Wir rechnen grob mit 5,8%. Beachte, dass das Kapital nach einem Einkauf drei Jahre gesperrt ist. Ein Kapitalbezug ist in dieser Zeit nicht möglich.</p>
+      <p>Mit einem freiwilligen Einkauf zahlst du zusätzliches Kapital in die Pensionskasse ein. Das <b>erhöht deine lebenslange Rente</b> und senkt im Einkaufsjahr deine Steuern. Wie viel Rente ein Einkauf bringt, hängt von deiner Kasse ab. Wir rechnen mit 5%. Beachte, dass das Kapital nach einem Einkauf drei Jahre gesperrt ist. Ein Kapitalbezug ist in dieser Zeit nicht möglich.</p>
       <div class="lever"><div class="top"><span class="lab">Einmaliger Einkauf</span><span class="val" id="lv-einkauf">CHF 0</span></div><input type="range" id="r-einkauf" min="0" max="100000" step="5000" value="0"></div>
     </div>
 
     <div class="sheet-panel" id="panel-beitrag">
       <h3>Säule 3a: jährlicher Beitrag</h3>
       <p>Wie viel du jährlich in die Säule 3a einzahlst, hast du selbst in der Hand. Das Maximum mit Pensionskasse liegt 2026 bei <b>CHF 7'258</b>. Voll ausgeschöpft bringt das über die Jahre spürbar mehr Kapital und jedes Jahr eine Steuerersparnis.</p>
-      <div class="lever"><div class="top"><span class="lab">Beitrag pro Jahr</span><span class="val" id="lv-beitrag">CHF 4'000</span></div><input type="range" id="r-beitrag" min="0" max="7258" step="50" value="4000"></div>
+      <div class="lever"><div class="top"><span class="lab">Beitrag pro Jahr</span><span class="val" id="lv-beitrag">CHF 7'258</span></div><input type="range" id="r-beitrag" min="0" max="7258" step="50" value="7258"></div>
     </div>
 
     <div class="sheet-panel" id="panel-strat">
       <h3>Säule 3a: Anlagestrategie</h3>
       <p>Je höher der Aktienanteil, desto höher die erwartete Rendite und desto grösser die Schwankung. Probier aus, was die drei Varianten über deinen Zeithorizont bewirken.</p>
-      <div class="lever"><div class="top"><span class="lab">Strategie</span></div><div class="seg" id="r-strat" role="group"><button data-r="0.005" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktien-lastig</button></div><div class="hint">Rendite pro Jahr: 0,5% · 2,5% · 5%. Sie läuft auch nach der Pensionierung auf dem verbleibenden Kapital weiter.</div></div>
+      <div class="lever"><div class="top"><span class="lab">Strategie</span></div><div class="seg" id="r-strat" role="group"><button data-r="0.005" aria-pressed="false">Konto / Versicherung</button><button data-r="0.025" aria-pressed="true">Ausgewogen</button><button data-r="0.05" aria-pressed="false">Aktien-lastig</button></div><div class="hint">Rendite pro Jahr: 0,5% · 2,5% · 5%. Nach der Pensionierung rechnen wir auf dem verbleibenden Kapital mit der halben Rendite.</div></div>
     </div>
 
     <div class="sheet-panel" id="panel-s3b">
       <h3>Weiteres Vermögen (3b)</h3>
       <p>Dein übriges Erspartes ausserhalb der Vorsorge. Schalte es ein oder aus, um dein Bild mit und ohne zu sehen. Oder verändere den Betrag, den du bis 65 erwartest.</p>
       <div class="lever"><div class="top"><span class="lab">Mitrechnen?</span></div><div class="seg" id="r-s3b-mit" role="group"><button data-m="ja" aria-pressed="true">Mit</button><button data-m="nein" aria-pressed="false">Ohne</button></div></div>
-      <div class="lever" id="r-s3b-wrap"><div class="top"><span class="lab">Vermögen mit 65</span><span class="val" id="lv-s3b">CHF 0</span></div><input type="range" id="r-s3b" min="0" max="500000" step="10000" value="0"></div>
+      <div class="lever" id="r-s3b-wrap"><div class="top"><span class="lab">Vermögen mit 65</span><span class="val" id="lv-s3b">CHF 0</span></div><input type="number" id="r-s3b" min="0" step="1000" value="0" placeholder="z.B. 150000"></div>
     </div>
 
     <div class="sheet-echo">Mit dieser Einstellung: <b id="m-brutto">CHF 5'250</b> / Mt. · Lücke <b id="m-luecke" class="neg">CHF 1'150</b></div>
@@ -539,7 +545,7 @@
    Änderungen gegenüber Prototyp v1 sind mit "V2" markiert. Alles andere ist
    deckungsgleich. Element-IDs nicht umbenennen.
    ================================================================================ */
-const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.07,pkEinkaufSatz:0.058,ahvNachzahlProJahr:57,ahv13:1,s3aSteuer:0.08,rKonto:0.005,rAusg:0.025,rAktien:0.05};
+const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.07,pkEinkaufSatz:0.05,ahvNachzahlProJahr:57,ahv13:1,s3aSteuer:0.08,bezugFaktor:0.5,rKonto:0.005,rAusg:0.025,rAktien:0.05};
 /* V2: nominal (ohne Teuerung). 3a-Kapitalsteuer 8% einmalig vor dem Bezug. Rendite läuft in der Bezugsphase mit demselben Satz weiter. */ /* V2: 13. AHV-Rente nicht auf Monate verteilt, Karte nennt sie als Zusatz */
 const $=id=>document.getElementById(id);
 function val(id){return parseFloat($(id).value)||0;}
@@ -552,7 +558,7 @@ let auslandJa=true;
 let mit3b=true; /* V2: Umschalter mit/ohne weiteres Vermögen */
 function s3aKapital(kap,beitrag,rate,n){const fv=(rate===0)?n:(Math.pow(1+rate,n)-1)/rate;return kap*Math.pow(1+rate,n)+Math.min(beitrag,A.s3aMax)*fv;}
 function annuitaet(kapital,rate,months){if(kapital<=0)return 0;const i=rate/12;if(i===0)return kapital/months;return kapital*i/(1-Math.pow(1+i,-months));}
-function s3aRente(kap,beitrag,rate,n,months){return annuitaet(s3aKapital(kap,beitrag,rate,n)*(1-A.s3aSteuer),rate,months);}
+function s3aRente(kap,beitrag,rate,n,months){return annuitaet(s3aKapital(kap,beitrag,rate,n)*(1-A.s3aSteuer),rate*A.bezugFaktor,months);} /* V2: Bezugsphase mit halber Rendite */
 
 function computeWith(p){
   const alter=val('alter'),lohn=val('lohn'),ahv65=val('ahv65'),ausland=auslandJa?val('ausland'):0,pkRente=val('pkrente'),s3aKap=val('s3akap');
@@ -563,7 +569,7 @@ function computeWith(p){
   const ahv=pensAlter<A.ahvMinAlter?0:(ahv65+nachJ*A.ahvNachzahlProJahr)*(1-A.ahvVorbezug*(65-pensAlter))*A.ahv13;
   const pk=pkRente*(1-A.pkKuerzung*(65-pensAlter))+einkauf*A.pkEinkaufSatz/12;
   const s3a=s3aRente(s3aKap,beitrag,r,jahre,months);
-  const s3b=annuitaet(s3bKap,r,months); /* V2: weiteres Vermögen mit gleicher Rendite, ohne Kapitalsteuer */
+  const s3b=annuitaet(s3bKap,r*A.bezugFaktor,months); /* V2: weiteres Vermögen mit gleicher Rendite, ohne Kapitalsteuer */
   const brutto=ahv+pk+s3a+s3b+ausland;
   return {alter,pensAlter,ahv,pk,s3a,s3b,ausland,brutto,netto:(ahv+pk+ausland)*(1-A.steuersatz)+s3a+s3b, /* V2: Einkommenssteuer nur auf Renten; 3a bereits versteuert, 3b eigenes Erspartes */ziel:lohn*A.ersatzquote,luecke:lohn*A.ersatzquote-brutto,beitrag,einkauf,r,jahre,months,s3aKap,bezugAlter};
 }
@@ -578,19 +584,21 @@ function fillResult(p,d){
   setTxt(p+'-netto',chf(d.netto));
   setTxt(p+'-v-ahv',chf(d.ahv));setTxt(p+'-v-pk',chf(d.pk));setTxt(p+'-v-s3a',chf(d.s3a));setTxt(p+'-v-s3b',chf(d.s3b));setTxt(p+'-v-aus',chf(d.ausland));
   const bar=$(p+'-bar');if(bar){const t=d.brutto||1;bar.children[0].style.width=(d.ahv/t*100)+'%';bar.children[1].style.width=(d.pk/t*100)+'%';bar.children[2].style.width=(d.s3a/t*100)+'%';bar.children[3].style.width=(d.s3b/t*100)+'%';bar.children[4].style.width=(d.ausland/t*100)+'%';}
-  const filled=Math.max(0,Math.min(100,d.brutto/d.ziel*100));
+  const filled=d.ziel>0?Math.max(0,Math.min(100,d.brutto/d.ziel*100)):0; /* V2: Guard leere Eingaben */
   const f=$(p+'-fill');if(f)f.style.width=filled+'%';const s=$(p+'-short');if(s)s.style.width=(100-filled)+'%';
   setTxt(p+'-g-have',chf(d.brutto));setTxt(p+'-g-ziel',chf(d.ziel));
   /* V2: Lücken-Text in drei Varianten */
   const w=$(p+'-g-luecke-wrap');
   if(w){
-    if(d.luecke>50){w.className='luecke-callout';w.innerHTML='Es fehlen dir monatlich <b id="'+p+'-g-luecke">'+chf(d.luecke)+'</b> bis zum Ziel.';}
+    if(d.ziel<=0){w.className='luecke-callout';w.innerHTML='Trag in Schritt 1 dein Bruttoeinkommen ein, dann siehst du hier dein Ziel und deine Lücke.';}
+    else if(d.luecke>50){w.className='luecke-callout';w.innerHTML='Es fehlen dir monatlich <b id="'+p+'-g-luecke">'+chf(d.luecke)+'</b> bis zum Ziel.';}
     else if(d.luecke<-50){w.className='luecke-callout ok';w.innerHTML='Du liegst <b id="'+p+'-g-luecke">'+chf(-d.luecke)+'</b> über deinem Ziel. Dein Lebensstandard ist gedeckt.';}
     else{w.className='luecke-callout ok';w.innerHTML='<b id="'+p+'-g-luecke">Du erreichst dein Ziel.</b>';}
   }
 }
 
 function lueckeText(d){
+  if(d.ziel<=0) return '';
   if(d.luecke>50){const pct=Math.round(d.luecke/d.ziel*100);const q=pct<12?'eine kleine Lücke':pct<28?'eine spürbare Lücke':'eine deutliche Lücke';return 'Das sind etwa '+pct+'% deines Ziels, also '+q+'. Einen Teil davon kannst du beeinflussen. Im nächsten Schritt siehst du, wie viel.';}
   return 'Dein Einkommen liegt bei rund '+Math.round(d.brutto/d.ziel*100)+'% deines Ziels. Das ist eine solide Ausgangslage.';
 }
@@ -604,19 +612,19 @@ function zwischenTexte(d){
   $('z-aus-wrap').style.display=(auslandJa&&d.ausland>0)?'':'none';
   {const sum=d.ahv+d.ausland, max=2520; $('z-aus-wrap').innerHTML='Dazu kommt deine ausländische Rente von <b>'+chf(d.ausland)+'</b>. Zusammen ergibt das <b>'+chf(sum)+'</b> pro Monat. '+(sum>max*1.02?'Damit liegst du sogar über der Maximalrente der AHV.':sum>=0.85*max?'Damit erreichst du fast die Maximalrente der AHV.':'Das liegt immer noch unter der Maximalrente der AHV. Umso wichtiger sind die nächsten beiden Säulen.');}
   const teil=d.ahv>0&&d.ahv<2200;
-  $('z-ahv-txt').innerHTML=teil?'Das ist eine <b>Teilrente</b>. Sie ist ein Zeichen fehlender Beitragsjahre und häufig bei späterem Zuzug.'+(auslandJa&&d.ausland>0?'':' Umso mehr zählen die nächsten beiden Säulen.'):(d.ahv>=AHV_MAX-5?'Das ist die Maximalrente. Deine Beitragsjahre sind vollständig.':'Das liegt nahe am Maximum. Deine Beitragsjahre sind weitgehend vollständig.');
+  $('z-ahv-txt').innerHTML=d.ahv<=0?'Trag oben deine AHV-Rente ein.':teil?'Das ist eine <b>Teilrente</b>. Sie ist ein Zeichen fehlender Beitragsjahre und häufig bei späterem Zuzug.'+(auslandJa&&d.ausland>0?'':' Umso mehr zählen die nächsten beiden Säulen.'):(d.ahv>=AHV_MAX-5?'Das ist die Maximalrente. Deine Beitragsjahre sind vollständig.':'Das liegt nahe am Maximum. Deine Beitragsjahre sind weitgehend vollständig.');
   setTxt('z-pk',grp(Math.round(d.pk/10)*10));
-  const pct=Math.round((d.ahv+d.pk)/lohn*100);
+  const pct=lohn>0?Math.round((d.ahv+d.pk)/lohn*100):0;
   let st;
   if(pct>=60) st='Damit ist das Ziel der ersten beiden Säulen erreicht.';
   else if(pct>=50) st='Das ist knapp unter dem Ziel von 60%. Wenn du diesen Anteil erhöhen willst, ist ein freiwilliger Einkauf in die Pensionskasse der direkteste Weg. In den Szenarien kannst du ausprobieren, was er bringt.';
   else st='Das ist noch unter dem Ziel von 60%. Bei späterem Zuzug in die Schweiz ist das häufig so. Ein Einkauf in die Pensionskasse kann einen Teil auffangen, und die 3. Säule den Rest. In den Szenarien siehst du, wie viel.';
-  $('z-pk-txt').innerHTML='AHV und Pensionskasse ergeben zusammen rund <b>'+pct+'%</b> deines Lohnes. '+st;
+  $('z-pk-txt').innerHTML=(lohn<=0||d.pk<=0)?(d.pk<=0?'Trag oben deine PK-Rente ein.':'Trag in Schritt 1 dein Bruttoeinkommen ein, dann ordnen wir die Zahl ein.'):'AHV und Pensionskasse ergeben zusammen rund <b>'+pct+'%</b> deines Lohnes. '+st;
   setTxt('z-s3a',grp(Math.round(d.s3a/10)*10));
   setTxt('z-bezug',d.bezugAlter);
   setTxt('z-s3b',chf(d.s3b));
   $('z-s3b-wrap').style.display=d.s3b>0?'':'none';
-  $('z-s3a-txt').innerHTML='Das ergibt sich aus deinem Kapital, deinen Beiträgen über '+d.jahre+' Jahre und '+(baseStrat*100).toString().replace('.',',')+'% Rendite pro Jahr, nach Abzug der Kapitalsteuer. Bei diesem Betrag hast du den grössten Spielraum. Den schauen wir uns in den Szenarien an.';
+  $('z-s3a-txt').innerHTML=(d.alter<=0)?'Trag in Schritt 1 dein Alter ein, dann rechnen wir die Jahre bis zur Pensionierung.':'Das ergibt sich aus deinem Kapital, deinen Beiträgen über '+d.jahre+' Jahre und '+(baseStrat*100).toString().replace('.',',')+'% Rendite pro Jahr, nach Abzug der Kapitalsteuer. Bei diesem Betrag hast du den grössten Spielraum. Den schauen wir uns in den Szenarien an.';
 }
 function openSheet(key){document.querySelectorAll('.sheet-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+key));$('overlay').classList.add('open');}
 function closeSheet(){$('overlay').classList.remove('open');}
@@ -626,7 +634,7 @@ function scenarioStory(scen,base){
   const age=parseInt($('r-age').value); if(age!==65) parts.push('Pensionierung mit '+age);
   const nj=parseInt($('r-ahvnach').value)||0; if(nj>0) parts.push(nj+(nj===1?' Jahr':' Jahre')+' AHV nachgezahlt');
   const ek=parseFloat($('r-einkauf').value); if(ek>0) parts.push('PK-Einkauf von CHF '+grp(ek));
-  const be=parseFloat($('r-beitrag').value), beDef=Math.min(val('s3abeitrag'),A.s3aMax); if(Math.abs(be-beDef)>1) parts.push('3a-Beitrag CHF '+grp(be)+'/Jahr');
+  const be=parseFloat($('r-beitrag').value), beDef=Math.min(val('s3abeitrag'),A.s3aMax); if(Math.abs(be-beDef)>49) parts.push('3a-Beitrag CHF '+grp(be)+'/Jahr');
   if(strat!==baseStrat) parts.push(strat===A.rKonto?'Anlage: Konto/Versicherung':strat===A.rAktien?'aktienlastige 3a-Anlage':'ausgewogene 3a-Anlage');
   if(Math.abs(scen.s3b-base.s3b)>1) parts.push(scen.s3b>0?'weiteres Vermögen CHF '+grp(parseFloat($('r-s3b').value)):'ohne weiteres Vermögen');
   if(parts.length===0) return '<p>Noch hast du nichts verändert. Öffne unten eine Möglichkeit. Dein Ergebnis oben passt sich sofort an.</p>';
@@ -644,7 +652,7 @@ function estAHV(){
 function estPK(){
   const lohn=val('lohn')*12, eintritt=parseInt($('eintritt-pk').value)||25;
   const insured=Math.max(0,lohn-26460), jahre=Math.max(0,65-Math.max(20,eintritt));
-  return insured*0.16*jahre*0.058/12;
+  return insured*0.16*jahre*A.pkEinkaufSatz/12;
 }
 /* V2: Schätzer 3b — gleiche Aufzinsung wie 3a, ohne Maximum */
 let s3bStrat=A.rAusg;
@@ -685,6 +693,7 @@ function render(){
   /* V2: 3b-Zeilen und Umschalter nur wenn 3b erfasst */
   const has3b=val('s3b')>0;
   $('s3b-toggle-wrap').style.display=has3b?'':'none';
+  $('s3b-toggle-wrap-s').style.display=has3b?'':'none';
   document.querySelectorAll('.row-s3b').forEach(function(r){r.style.display=(has3b&&mit3b)?'':'none';});
   renderEstim();
   setTxt('oc-age','mit '+scen.pensAlter);
@@ -695,10 +704,10 @@ function render(){
   setChanged('age',scen.pensAlter!==65);
   setChanged('ahvnach',nj>0);
   setChanged('einkauf',scen.einkauf>0);
-  setChanged('beitrag',Math.abs(parseFloat($('r-beitrag').value)-Math.min(val('s3abeitrag'),A.s3aMax))>1);
+  setChanged('beitrag',Math.abs(parseFloat($('r-beitrag').value)-Math.min(val('s3abeitrag'),A.s3aMax))>49);
   setChanged('strat',strat!==baseStrat);
   setChanged('s3b',Math.abs(scen.s3b-base.s3b)>1);
-  {const m=scenMit3b===null?mit3b:scenMit3b;setTxt('oc-s3b',m?chf(parseFloat($('r-s3b').value)||0):'ohne');setTxt('lv-s3b',chf(parseFloat($('r-s3b').value)||0));document.querySelectorAll('#r-s3b-mit button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='ja')===m?'true':'false'));$('r-s3b-wrap').style.display=m?'':'none';}
+  {const m=scenMit3b===null?mit3b:scenMit3b;setTxt('oc-s3b',m?chf(parseFloat($('r-s3b').value)||0):'ohne');setTxt('lv-s3b',chf(parseFloat($('r-s3b').value)||0));document.querySelectorAll('#r-s3b-mit button, #s3b-toggle-s button').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='ja')===m?'true':'false'));$('r-s3b-wrap').style.display=m?'':'none';}
   setTxt('m-brutto','CHF '+grp(Math.round(scen.brutto/10)*10));
   {const ml=$('m-luecke'); if(ml){ml.textContent=scen.luecke>50?chf(scen.luecke):'keine';ml.className=scen.luecke>50?'neg':'';}}
   $('scenario-story').innerHTML=scenarioStory(scen,base);
@@ -714,21 +723,23 @@ function go(n){
   step=Math.max(0,Math.min(5,n));
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',parseInt(s.dataset.step)===step));
   document.querySelectorAll('#progress .segs button').forEach(b=>{const i=parseInt(b.dataset.step);b.setAttribute('aria-current',i===step?'true':'false');b.setAttribute('data-done',i<step?'true':'false');});
-  setTxt('p-num',step+1);setTxt('p-name',STEPS[step]);
+  setTxt('p-num',step+1);setTxt('p-name',STEPS[step]);setTxt('p-num-m',step+1);setTxt('p-name-m',STEPS[step]);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('#progress .segs button').forEach(b=>b.addEventListener('click',()=>go(parseInt(b.dataset.step))));
 
-function syncBeitragSlider(){$('r-beitrag').value=Math.max(0,Math.min(7258,val('s3abeitrag')));}
+function setS3aMax(){$('s3abeitrag').value=A.s3aMax;syncBeitragSlider();render();}
+function clampS3a(){const e=$('s3abeitrag');if(parseFloat(e.value)>A.s3aMax)e.value=A.s3aMax;}
+function syncBeitragSlider(){clampS3a();$('r-beitrag').value=Math.max(0,Math.min(7258,val('s3abeitrag')));}
 function setStrat(v){strat=v;document.querySelectorAll('#r-strat button').forEach(x=>x.setAttribute('aria-pressed',parseFloat(x.dataset.r)===v?'true':'false'));}
-function syncS3bSlider(){$('r-s3b').value=Math.max(0,Math.min(500000,val('s3b')));}
+function syncS3bSlider(){$('r-s3b').value=Math.max(0,val('s3b'));}
 function resetScenario(){$('r-age').value=65;$('r-einkauf').value=0;$('r-ahvnach').value=0;syncBeitragSlider();syncS3bSlider();scenMit3b=null;setStrat(baseStrat);render();}
 
-['alter','lohn','ausland','pkrente','s3akap','s3b','bezugAlter'].forEach(id=>$(id).addEventListener('input',render));
+['alter','lohn','ausland','pkrente','s3akap','bezugAlter'].forEach(id=>$(id).addEventListener('input',render));
 $('ahv65').addEventListener('input',()=>{clampAhv();render();});
 ['r-age','r-beitrag','r-einkauf','r-ahvnach','r-s3b'].forEach(id=>$(id).addEventListener('input',render));
-$('s3b').addEventListener('input',syncS3bSlider);
-document.querySelectorAll('#r-s3b-mit button').forEach(b=>b.addEventListener('click',()=>{scenMit3b=b.dataset.m==='ja';render();}));
+$('s3b').addEventListener('input',()=>{syncS3bSlider();render();});
+document.querySelectorAll('#r-s3b-mit button, #s3b-toggle-s button').forEach(b=>b.addEventListener('click',()=>{scenMit3b=b.dataset.m==='ja';render();}));
 $('s3abeitrag').addEventListener('input',()=>{syncBeitragSlider();render();});
 ['eintritt-ahv','eintritt-pk','s3b-kap','s3b-spar'].forEach(id=>{var e=$(id);if(e)e.addEventListener('input',renderEstim);});
 document.querySelectorAll('#ausland-toggle button').forEach(b=>b.addEventListener('click',()=>setAusland(b.dataset.a==='ja')));
