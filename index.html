@@ -313,7 +313,7 @@
       <text x="405" y="65" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">CHF</text>
       <text x="405" y="92" text-anchor="middle" class="gcap">Rente</text>
     </svg>
-    <p class="sexp">Dieses Guthaben wird dann mit einem Umwandlungssatz in eine Rente umgerechnet. Dein Kapital multipliziert mit dem Umwandlungssatz ergibt deine Jahresrente. Um deine Monatsrente zu erhalten, dividieren wir die Jahresrente durch 12. Ein Beispiel: CHF 500'000 Kapital × 5% = CHF 25'000 im Jahr, also rund CHF 2'080 im Monat. Gesetzlich vorgeschrieben ist ein Umwandlungssatz von 6,8%, allerdings nur für den Lohnteil bis CHF 90'720. Für alles darüber rechnen die Kassen meist tiefer. Im Durchschnitt landen die meisten dann bei einem Umwandlungssatz von 5% bis 6%. Wir rechnen mit einem Umwandlungssatz von 5%, um auf der sicheren Seite zu sein.</p>
+    <p class="sexp">Dieses Guthaben wird dann mit einem Umwandlungssatz in eine Rente umgerechnet. Dein Kapital multipliziert mit dem Umwandlungssatz ergibt deine Jahresrente. Um deine Monatsrente zu erhalten, dividieren wir die Jahresrente durch 12. Ein Beispiel: CHF 500'000 Kapital × 5% = CHF 25'000 im Jahr, also rund CHF 2'080 im Monat. Gesetzlich vorgeschrieben ist ein Umwandlungssatz von 6,8%, allerdings nur für den Lohnteil bis CHF 90'720. Für alles darüber rechnen die Kassen meist tiefer. Im Durchschnitt landen die meisten dann bei einem Umwandlungssatz von 5% bis 6%. Diese Rechnung dient dir nur zum Verständnis. Deine Pensionskasse hat sie für dich bereits gemacht, das Ergebnis steht auf deinem Vorsorgeausweis. Nur wenn du deine Rente schätzen lässt, rechnen wir selbst: mit 6,8% auf dem Lohnteil bis CHF 90'720 und mit 4,5% auf dem Teil darüber, um auf der sicheren Seite zu sein.</p>
     <p class="sexp">Die Rente wird lebenslang ausbezahlt, unabhängig davon, ob dein Kapital rechnerisch längst aufgebraucht ist. Wer lange lebt, bekommt also mehr zurück, als er eingezahlt hat.</p>
     <p class="sexp">Bei der Pensionierung hast du die Wahl. Du kannst dein Alterskapital als lebenslange Rente beziehen. Du kannst es dir auch als Kapital auszahlen lassen, das nennt man Kapitalbezug. Dann liegt das Guthaben bei dir und du bist selbst dafür verantwortlich, dass es bis zum Lebensende reicht. Oder du kombinierst beides und beziehst einen Teil als Rente und einen Teil als Kapital. Wie viel du als Kapital beziehen darfst, hängt von deiner Kasse ab. Mindestens ein Viertel des obligatorischen Guthabens muss jede Kasse auszahlen, viele erlauben mehr oder das ganze Guthaben. Was bei dir gilt, steht im Reglement deiner Kasse. Die Rente ist die sichere Variante, weil sie auch dann weiterläuft, wenn du sehr alt wirst. Wer mit 65 länger lebt als der Durchschnitt (Männer bis etwa 85, Frauen bis etwa 88), bekommt mit der Rente insgesamt mehr. Für diesen Überblick rechnen wir deshalb mit der Rente.</p>
     <p class="sexp">Anders als bei der AHV kannst du hier selbst etwas beitragen. Mit einem freiwilligen Einkauf zahlst du zusätzliches Geld in deine Pensionskasse ein. Dein Alterskapital wächst, und damit auch die spätere Rente. Der Betrag lässt sich zudem vom steuerbaren Einkommen abziehen, du sparst also im Einkaufsjahr Steuern. Wie viel du einzahlen darfst, steht auf deinem Vorsorgeausweis als Einkaufspotenzial. Was ein Einkauf für dich bringt, kannst du in den Szenarien ausprobieren.</p>
@@ -557,7 +557,7 @@
    Änderungen gegenüber Prototyp v1 sind mit "V2" markiert. Alles andere ist
    deckungsgleich. Element-IDs nicht umbenennen.
    ================================================================================ */
-const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.07,pkEinkaufSatz:0.05,ahvNachzahlProJahr:57,ahv13:1,s3aSteuer:0.08,bezugFaktor:0.5,rKonto:0.005,rAusg:0.025,rAktien:0.05};
+const A={bezugAlter:90,steuersatz:0.12,ersatzquote:0.80,s3aMax:7258,ahvVorbezug:0.068,ahvMinAlter:63,pkKuerzung:0.07,pkEinkaufSatz:0.05,ahvNachzahlProJahr:57,ahv13:1,s3aSteuer:0.08,bezugFaktor:0.5,rKonto:0.005,rAusg:0.025,rAktien:0.05,bvgObergrenze:90720,koord:26460,uwsOblig:0.068,uwsUeber:0.045,pkSpar:0.16};
 /* V2: nominal (ohne Teuerung). 3a-Kapitalsteuer 8% einmalig vor dem Bezug. Rendite läuft in der Bezugsphase mit demselben Satz weiter. */ /* V2: 13. AHV-Rente nicht auf Monate verteilt, Karte nennt sie als Zusatz */
 const $=id=>document.getElementById(id);
 function val(id){return parseFloat($(id).value)||0;}
@@ -663,8 +663,9 @@ function estAHV(){
 }
 function estPK(){
   const lohn=val('lohn')*12, eintritt=parseInt($('eintritt-pk').value)||25;
-  const insured=Math.max(0,lohn-26460), jahre=Math.max(0,65-Math.max(20,eintritt));
-  return insured*0.16*jahre*A.pkEinkaufSatz/12;
+  const jahre=Math.max(0,65-Math.max(20,eintritt));
+  const oblig=Math.max(0,Math.min(lohn,A.bvgObergrenze)-A.koord), ueber=Math.max(0,lohn-A.bvgObergrenze); /* V2: Zweiteilung */
+  return (oblig*A.pkSpar*jahre*A.uwsOblig+ueber*A.pkSpar*jahre*A.uwsUeber)/12;
 }
 /* V2: Schätzer 3b — gleiche Aufzinsung wie 3a, ohne Maximum */
 let s3bStrat=A.rAusg;
